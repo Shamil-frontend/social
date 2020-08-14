@@ -2,7 +2,7 @@ import {
   FETCH_SOCIAL_GROUP_REQUESTED,
   FETCH_SOCIAL_GROUP_SUCCESS,
   FETCH_SOCIAL_GROUP_FAILURE
-} from './types';
+} from '../types';
 
 const initialState = {
   error: null,
@@ -23,7 +23,6 @@ const getSocialGroupsReducer = (state = initialState, action) => {
     case FETCH_SOCIAL_GROUP_SUCCESS:
       return {
         ...state,
-        error: null,
         loading: false,
         socialGroups: action.payload
       };
@@ -36,7 +35,7 @@ const getSocialGroupsReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 
 export { getSocialGroupsReducer };

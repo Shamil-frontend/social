@@ -1,30 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+// import ReactDom from 'react-dom';
 import { Col, Nav } from 'react-bootstrap';
 
-import SocialGroupDetails from './SocialGroupDetails';
-import useSocialGroupsData from './wrappers/use-list-data';
-import { fetchSocialGroups } from '../redux/actions';
-import { socialGroupsSelectors as selectors } from '../redux/selectors';
+import { fetchLivingWages } from '../redux/LivingWages/actions';
 
-const SocialGroupList = () => {
 
-  const eventKey = [
-    "employable",
-    "children",
-    "pensioner"
-  ];
+const SocialGroupList = ({ socialGroups, firstGroup }) => {
 
-  const [socialGroups, loading, error] = useSocialGroupsData(fetchSocialGroups, selectors);
+  const dispatch = useDispatch();
 
-  const loading = loading ? <Spinner /> : null;
-  const error = (error && !loading) ? <ErrorIndicator /> : null;
+  useEffect(() => {
+    dispatch(fetchLivingWages(firstGroup.id));
+  }, [dispatch, firstGroup.id])
 
   return (
-    <Col sm={3} className='p-0'>
+    <Col className='p-0'>
       <Nav variant="pills" className="flex-column">
-        {loading}
-        {error}
-        <SocialGroupDetails eventKey={eventKey} socialGroups={socialGroups} />
+        {socialGroups.map(({ id, name }) => (
+          <Nav.Item key={id}>
+            <Nav.Link eventKey={`socialgroup-${id}`} onClick={() => dispatch(fetchLivingWages(id))}>{name}</Nav.Link>
+          </Nav.Item>
+        ))}
+        <Nav.Item>
+          <Link style={{ padding: "8px 16px", display: 'block' }} to='/'>На главную</Link>
+        </Nav.Item>
       </Nav>
     </Col>
   )
