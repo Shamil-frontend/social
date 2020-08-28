@@ -1,52 +1,77 @@
 import {
+  SET_LIWING_WAGES_ID,
   FETCH_LIVING_WAGES_REQUESTED,
   FETCH_LIVING_WAGES_SUCCESS,
   FETCH_LIVING_WAGES_FAILURE,
-  SET_SOCIAL_GROUP_ID,
-  GET_LIVING_WAGES_LENGTH
+  LIVING_WAGES_ADD_REQUESTED,
+  LIVING_WAGES_ADD_SUCCESS,
+  LIVING_WAGES_ADD_FAILURE
 } from '../types';
 
-const initialState = {
+const INIT_STATE = {
   error: null,
   loading: false,
-  livingWages: [],
-  lengthLivingWages: null,
+  allLivingWages: [],
+  filteredLivingWages: [],
   id: 1,
-  activeButton: 1
+  addedLivingWages: null,
+  adding: false,
+  errorAdding: null,
 };
 
-const getLivingWagesReducer = (state = initialState, action) => {
+const getLivingWagesReducer = (state = INIT_STATE, action) => {
 
   switch (action.type) {
 
+    //Установка id
+    case SET_LIWING_WAGES_ID:
+      return {
+        ...state,
+        id: action.id
+      };
+
+    //Получение данных по прожиточному минимуму
     case FETCH_LIVING_WAGES_REQUESTED:
       return {
         ...state,
         error: null,
-        loading: true
+        loading: true,
+        filteredLivingWages: []
       };
     case FETCH_LIVING_WAGES_SUCCESS:
       return {
         ...state,
         loading: false,
-        livingWages: action.payload
+        allLivingWages: action.livingWages,
+        id: action.id
       };
     case FETCH_LIVING_WAGES_FAILURE:
       return {
         ...state,
-        error: action.payload,
+        error: action.error,
         loading: false
       };
-    case SET_SOCIAL_GROUP_ID:
+
+    //Добавление элемента в таблицу
+    case LIVING_WAGES_ADD_REQUESTED:
       return {
         ...state,
-        id: action.id
+        adding: true,
+        errorAdding: null
       };
-    case GET_LIVING_WAGES_LENGTH:
+    case LIVING_WAGES_ADD_SUCCESS:
       return {
         ...state,
-        lengthLivingWages: action.length
+        addedLivingWages: action.responseData,
+        adding: false
       };
+    case LIVING_WAGES_ADD_FAILURE:
+      return {
+        ...state,
+        adding: false,
+        errorAdding: action.error
+      };
+
     default:
       return state;
   }

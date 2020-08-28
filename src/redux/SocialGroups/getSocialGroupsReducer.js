@@ -4,13 +4,13 @@ import {
   FETCH_SOCIAL_GROUP_FAILURE
 } from '../types';
 
-const initialState = {
+const INIT_STATE = {
   error: null,
   loading: true,
   socialGroups: []
 };
 
-const getSocialGroupsReducer = (state = initialState, action) => {
+const getSocialGroupsReducer = (state = INIT_STATE, action) => {
 
   switch (action.type) {
 

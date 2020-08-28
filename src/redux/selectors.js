@@ -8,7 +8,7 @@ const socialGroupsSelectors = {
 };
 
 
-const livingWages = state => state.getLivingWages.livingWages;
+const livingWages = state => state.getLivingWages.allLivingWages;
 const livingWagesLoading = state => state.getLivingWages.loading;
 const livingWagesError = state => state.getLivingWages.error;
 const livingWagesSelectors = {
