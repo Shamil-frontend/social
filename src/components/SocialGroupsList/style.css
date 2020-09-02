@@ -1,0 +1,46 @@
+.nav-link  { 
+  color: #ffffff
+}
+
+.nav-link:hover  { 
+  text-decoration: underline;
+  color: #0a4064 !important;
+  text-shadow: 0 0 1px rgb(31, 71, 122); 
+}
+.nav-item a:hover { 
+  text-decoration: underline;
+  color: #0a4064 !important;
+  text-shadow: 0 0 1px rgb(31, 71, 122)
+}
+
+.nav-item:hover,
+.nav-item:focus{ 
+  border-radius: 3px;
+  background-color: #c3c4c5;
+}
+
+.nav-item:active{ 
+  outline:  rgba(158, 95, 95, 0.7);
+  box-shadow: inset 0px 0px 5px 1px rgba(129, 129, 129, 0.7);
+  
+}
+
+.nav-item a { 
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link { 
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.nav-block {
+  border-radius: 3px 3px 0px 0px;
+
+  border: 3px solid rgb(92, 97, 102);
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.7);
+  background-color: #6a727a;
+  color: #ffffff;
+}

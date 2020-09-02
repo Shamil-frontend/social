@@ -9,10 +9,15 @@ import Button from 'react-bootstrap/Button';
 import SubmitBtn from '../SubmitBtn';
 
 import './DeleteBtn.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { delLivingWages } from '../../../redux/LivingWages/actions';
 
-const DeleteBtn = ({ onDelete }) => {
+const DeleteBtn = ({ onDelete, itemId, groupId }) => {
+  const dispatch = useDispatch();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [comment, setComment] = useState('');
   const [isValidated, setIsValidated] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -21,6 +26,7 @@ const DeleteBtn = ({ onDelete }) => {
   const onError = () => setIsSubmitting(false);
 
   const onSubmit = (evt) => {
+    console.log("event :", evt.currentTarget)
     const form = evt.currentTarget;
 
     evt.preventDefault();
@@ -32,28 +38,19 @@ const DeleteBtn = ({ onDelete }) => {
     } else {
       setIsSubmitting(true);
 
-      onDelete(comment, onError);
+      onDelete(onError);
     }
-
     setIsValidated(true);
+    dispatch(delLivingWages(itemId, groupId));
   };
 
   return (
     <React.Fragment>
-      <Button onClick={toggleModal}>+</Button>
+      <Button className="btn-danger" onClick={toggleModal}><FontAwesomeIcon icon={faTrashAlt} /></Button>
       <Modal className="delete-modal" show={isModalOpen} onHide={toggleModal} centered>
         <Modal.Body>
           <h2 className="mb-4 text-center">Удаление аренды</h2>
           <Form id="add-rent-form" validated={isValidated} onSubmit={onSubmit} noValidate>
-            <Form.Group controlId="comment">
-              <Form.Control
-                as="textarea"
-                value={comment}
-                onChange={(evt) => setComment(evt.target.value)}
-                placeholder="Комментарий"
-                required
-              />
-            </Form.Group>
             <div className="mt-4 text-center">
               <SubmitBtn isSubmitting={isSubmitting} text="Удалить" variant="danger" />
               <Button className="ml-2" variant="light" onClick={toggleModal}>

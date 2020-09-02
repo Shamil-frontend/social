@@ -5,12 +5,15 @@ import {
   FETCH_LIVING_WAGES_FAILURE,
   LIVING_WAGES_ADD_REQUESTED,
   LIVING_WAGES_ADD_SUCCESS,
-  LIVING_WAGES_ADD_FAILURE
+  LIVING_WAGES_ADD_FAILURE,
+  LIVING_WAGES_DEL_REQUESTED,
+  LIVING_WAGES_DEL_SUCCESS,
+  LIVING_WAGES_DEL_FAILURE,
 } from '../types';
 import axios from '../../services/axios';
 import objectToFormData from '../../utils/objectToFormData';
 
-// Установка id таблицы прожиточного минимума
+// Установка id блока данных прожиточного минимума
 const setLivingWagesId = (id) => {
   return {
     type: SET_LIWING_WAGES_ID,
@@ -22,7 +25,7 @@ const setId = (id) => (dispatch) => {
   dispatch(setLivingWagesId(id));
 };
 
-// Получение таблиц прожиточного минимума
+// Получение данных по прожиточному минимума
 const livingWagesRequested = () => {
   return {
     type: FETCH_LIVING_WAGES_REQUESTED
@@ -49,13 +52,13 @@ const fetchLivingWages = (id) => {
     dispatch(livingWagesRequested());
     return await axios.get(`livingwages/${id}`)
       .then(response => {
-        dispatch(livingWagesSuccess(response.data, id));
+        dispatch(livingWagesSuccess(response.data));
       })
       .catch(error => dispatch(livingWagesFailure(error.response.data)));
   }
 };
 
-//Добавление элемента в таблицу
+//Добавление элемента
 const addLivingWagesRequested = () => {
   return {
     type: LIVING_WAGES_ADD_REQUESTED
@@ -88,13 +91,10 @@ const addLivingWages = (values, socialGroupsId, id) => {
         dateStart
       }
     });
-
   return (dispatch) => {
     dispatch(addLivingWagesRequested());
     return Promise.all(array.map((item) => {
       const formData = objectToFormData(item);
-
-      console.log("item", item);
       return axios.post(`livingwage`, formData)
         .then(response => {
           dispatch(addLivingWagesSuccess(response.data));
@@ -102,7 +102,41 @@ const addLivingWages = (values, socialGroupsId, id) => {
         })
         .catch(error => dispatch(addLivingWagesFailure(error.response.data)));
     }))
+  };
+};
+// Удаление элемента
+const delLivingWagesRequested = () => {
+  return {
+    type: LIVING_WAGES_DEL_REQUESTED
   }
 };
 
-export { setId, fetchLivingWages, addLivingWages };
+const delLivingWagesSuccess = () => {
+  return {
+    type: LIVING_WAGES_DEL_SUCCESS,
+  }
+};
+
+const delLivingWagesFailure = (error) => {
+  return {
+    type: LIVING_WAGES_DEL_FAILURE,
+    error
+  }
+};
+
+const delLivingWages = (itemId, groupId) => {
+
+  return async (dispatch) => {
+    dispatch(delLivingWagesRequested());
+    return await axios.delete(`livingwage/${itemId}`)
+      .then(response => {
+        dispatch(delLivingWagesSuccess());
+        if (response.status === 200) {
+          dispatch(fetchLivingWages(groupId));
+        }
+      })
+      .catch(error => dispatch(delLivingWagesFailure(error.response.data)));
+  }
+};
+
+export { setId, fetchLivingWages, addLivingWages, delLivingWages };

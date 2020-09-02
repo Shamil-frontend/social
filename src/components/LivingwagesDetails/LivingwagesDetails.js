@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Tab, Table, Form } from 'react-bootstrap';
+import { Tab, Table, Form, Col, Row, ButtonGroup } from 'react-bootstrap';
 
 import LoadingIndicator from '../generic/LoadingIndicator';
 import ErrorIndicator from '../generic/ErrorIndicator';
@@ -11,6 +11,8 @@ import DeleteBtn from '../generic/DeleteBtn';
 
 import extractDate from '../../utils/extractDate';
 import { fetchLivingWages } from '../../redux/LivingWages/actions';
+
+import './style.css';
 
 const LivingwagesDetails = ({ values, setNewValues }) => {
 
@@ -28,13 +30,15 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
   const [activePage, setActivePage] = useState(1);
   const [bool, setBool] = useState(true);
   const [filterlivingWages, setFilteLivingWages] = useState([]);
+  const [pageLimit, setPageLimit] = useState(10);
 
-  const pageLimit = 8;
+  const socialgroupId = id;
+  const pageLimits = [10, 15, 20];
   const portionLimit = 3;
 
   const visibleArray = values ? filterlivingWages : allLivingWages;
 
-  const onSearchTable = (array, term, pageLimit) => {
+  const onSearchTable = (array, term, limit) => {
     if (!term) {
       setBool(true);
       return true;
@@ -42,7 +46,7 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
       const filterArray = array.filter((item) => {
         return String(item.wageValue).startsWith(term);
       });
-      filterArray.length <= pageLimit ? setBool(false) : setBool(true);
+      filterArray.length <= limit ? setBool(false) : setBool(true);
       setFilteLivingWages(filterArray);
     }
   };
@@ -53,23 +57,28 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
     setPage(array.slice(startIndex, endIndex));
   };
 
+  const onChangeSelect = (evt) => {
+    setPageLimit(evt.target.value);
+  };
+
   useEffect(() => {
     dispatch(fetchLivingWages(id));
     setActivePage(1);
     setNewValues("");
+    setPageLimit(10);
   }, [dispatch, id]);
 
   useEffect(() => {
-    onSearchTable(allLivingWages, values, pageLimit)
+    onSearchTable(allLivingWages, values, pageLimit);
     setActivePage(1);
   }, [allLivingWages, values, pageLimit]);
 
   useEffect(() => {
-    showPage(activePage, pageLimit, visibleArray)
+    showPage(activePage, pageLimit, visibleArray);
   }, [activePage, pageLimit, visibleArray]);
 
-  const deleteItem = (comment, onError) => {
-    console.log(comment, onError);
+  const deleteItem = (onError) => {
+    console.log(onError);
   };
 
   const years = visibleArray.map(({ dateStart }) => extractDate(dateStart, 'year')).sort();
@@ -85,17 +94,24 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
 
   return (
     <Tab.Content>
-      <Tab.Pane eventKey={`socialgroup-${id}`}>
-        <Table striped bordered hover>
-          <thead className="table-block">
+      <Tab.Pane eventKey={`socialgroup-${id}`} className="tab-pane">
+        <Table striped bordered hover className="data-table">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <thead className="thead-block" >
             <tr>
               <th>
                 <h5>Сортировка</h5>
               </th>
               <th>
                 <Form.Group style={{ margin: '10px' }}>
-                  <Form.Label>Выберите год</Form.Label>
+                  <Form.Label></Form.Label>
                   <Form.Control as="select" size="sm" custom style={{ display: 'block' }}>
+                    <option disabled >Год</option>
                     {years.filter((item, index) => years.indexOf(item) === index).map((year, index) => {
                       return <option key={index} value={year}>{year}</option>
                     })}
@@ -104,51 +120,85 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
               </th>
               <th>
                 <Form.Group style={{ margin: '10px' }}>
-                  <Form.Label>Выберите месяц</Form.Label>
-                  <Form.Control as="select" size="sm" custom style={{ display: 'block' }}>
+                  <Form.Label></Form.Label>
+                  <Form.Control as="select" size="sm" custom style={{ display: 'block' }} >
+                    <option disabled >Месяц</option>
                     {months.filter((item, index) => months.indexOf(item) === index).map((month, index) => {
                       return <option key={index} value={month}>{month}</option>
                     })}
                   </Form.Control>
                 </Form.Group>
               </th>
-            </tr>
+              <th rowSpan="2"></th>
+            </tr >
             <tr>
               <th>Прожиточный минмум</th>
               <th>Дата начала</th>
               <th>Дата окончания</th>
-              <th>Удаление</th>
             </tr>
           </thead>
           <tbody>
-            {page.length ? (
-              page.map(({ id, wageValue, dateStart, dateStop }) => (
-                <tr key={id}>
-                  <td>{wageValue}</td>
-                  <td>{convertDate(dateStart)}</td>
-                  <td>{convertDate(dateStop)}</td>
-                  <td >
-                    <DeleteBtn onDelete={deleteItem} />
-                  </td>
-                </tr>
-              ))) : (
-                <tr>
-                  <td className="text-muted">Ничего не найдено</td>
-                </tr>
-              )}
+            <tr>
+              <td colSpan="4" className="p-0">
+                <div className="table-wrapper">
+                  <table className="table-container">
+                    <colgroup>
+                      <col />
+                      <col />
+                      <col />
+                      <col />
+                    </colgroup>
+                    <tbody className="tBody-block">
+                      {page.length ? (
+                        page.map(({ id, wageValue, dateStart, dateStop }) => (
+                          <tr key={id}>
+                            <td>{wageValue}</td>
+                            <td>{convertDate(dateStart)}</td>
+                            <td>{convertDate(dateStop)}</td>
+                            <td >
+                              <ButtonGroup className="float-right">
+                                <DeleteBtn onDelete={deleteItem} itemId={id} groupId={socialgroupId} />
+                              </ButtonGroup>
+                            </td>
+                          </tr>
+                        ))) : (
+                          <tr>
+                            <td className="text-muted">Ничего не найдено</td>
+                          </tr>
+                        )}
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
           </tbody>
-        </Table>
-        {bool ?
-          <Paginator
-            totalItemsCount={visibleArray.length}
-            portionLimit={portionLimit}
-            pageLimit={pageLimit}
-            activePage={activePage}
-            setActivePage={(itemPage) => setActivePage(itemPage)}
-          /> :
-          null}
-      </Tab.Pane>
-    </Tab.Content>
+
+        </Table >
+        <Row style={{ justifyContent: "space-between" }} className="pt-2 pb-2 search-block">
+          <Col >
+            {bool ?
+              <Paginator
+                totalItemsCount={visibleArray.length}
+                portionLimit={portionLimit}
+                pageLimit={pageLimit}
+                activePage={activePage}
+                setActivePage={(itemPage) => setActivePage(itemPage)}
+              /> :
+              null}
+          </Col>
+          <Col>
+            <Form.Group className="mb-0" style={{ display: 'flex', justifyContent: "flex-end" }}>
+              <Form.Label style={{ margin: "0", marginRight: "10px", fontSize: "18px" }}>Number of lines</Form.Label>
+              <Form.Control as="select" onChange={(evt) => onChangeSelect(evt)} size="sm" custom style={{ display: 'block', width: "30%", fontSize: "15px" }}>
+                {pageLimits.map((item, index) => {
+                  return <option key={index} value={item}>{item}</option>
+                })}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
+      </Tab.Pane >
+    </Tab.Content >
   )
 }
 

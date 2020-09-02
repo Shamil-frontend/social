@@ -12,6 +12,8 @@ import { setId } from '../../redux/LivingWages/actions';
 // import LoadingIndicator from '../generic/LoadingIndicator';
 // import ErrorIndicator from '../generic/ErrorIndicator';
 
+import './style.css';
+
 const SocialGroupList = ({ socialGroups }) => {
 
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const SocialGroupList = ({ socialGroups }) => {
   // }
 
   return (
-    <Col >
+    <Col className="nav-block">
       <Nav variant="pills" className="flex-column">
         {socialGroups.map(({ id, name }) => (
           <Nav.Item key={id}>

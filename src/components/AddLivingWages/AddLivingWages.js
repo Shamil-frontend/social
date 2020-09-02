@@ -14,7 +14,7 @@ import CustomField from '../generic/CustomField';
 import DatePicker from '../generic/DatePicker';
 // import CustomSelect from '../generic/CustomSelect';
 
-import { addLivingWages, fetchLivingWages } from '../../redux/LivingWages/actions';
+import { addLivingWages } from '../../redux/LivingWages/actions';
 
 import validationSchemaLocale from '../../utils/validationSchemaLocale';
 // import objectToFormData from '../../utils/objectToFormData';
@@ -105,15 +105,6 @@ const AddLivingWages = () => {
                   <legend style={{ display: "none" }}>Данные по прожиточному минимуму</legend>
                   <Row>
                     <Col >
-                      {/* <Form.Group as={Col} sm={12} md={12} lg={12} controlId="socialGroupId" >
-                        <CustomSelect
-                          name="socialGroupId"
-                          label="Социальные группы"
-                          data={socialGroups.data}
-                          isLoading={socialGroups.loading}
-                          isDisabled={socialGroups.error}
-                        />
-                      </Form.Group> */}
                       <Form.Row>
                         <Form.Group as={Col} sm={6} md={6} lg={6} controlId="employableWageValue">
                           <CustomField type="number" name="employableWageValue" label="Трудоспособные" />

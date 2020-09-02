@@ -5,7 +5,10 @@ import {
   FETCH_LIVING_WAGES_FAILURE,
   LIVING_WAGES_ADD_REQUESTED,
   LIVING_WAGES_ADD_SUCCESS,
-  LIVING_WAGES_ADD_FAILURE
+  LIVING_WAGES_ADD_FAILURE,
+  LIVING_WAGES_DEL_REQUESTED,
+  LIVING_WAGES_DEL_SUCCESS,
+  LIVING_WAGES_DEL_FAILURE,
 } from '../types';
 
 const INIT_STATE = {
@@ -17,6 +20,8 @@ const INIT_STATE = {
   addedLivingWages: null,
   adding: false,
   errorAdding: null,
+  deletion: false,
+  errorDeletion: null
 };
 
 const getLivingWagesReducer = (state = INIT_STATE, action) => {
@@ -43,7 +48,7 @@ const getLivingWagesReducer = (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         allLivingWages: action.livingWages,
-        id: action.id
+        // id: action.id
       };
     case FETCH_LIVING_WAGES_FAILURE:
       return {
@@ -52,7 +57,7 @@ const getLivingWagesReducer = (state = INIT_STATE, action) => {
         loading: false
       };
 
-    //Добавление элемента в таблицу
+    //Добавление элемента 
     case LIVING_WAGES_ADD_REQUESTED:
       return {
         ...state,
@@ -70,6 +75,25 @@ const getLivingWagesReducer = (state = INIT_STATE, action) => {
         ...state,
         adding: false,
         errorAdding: action.error
+      };
+
+    // Удаление элемента
+    case LIVING_WAGES_DEL_REQUESTED:
+      return {
+        ...state,
+        deletion: true,
+        errorDeletion: null
+      };
+    case LIVING_WAGES_DEL_SUCCESS:
+      return {
+        ...state,
+        deletion: false
+      };
+    case LIVING_WAGES_DEL_FAILURE:
+      return {
+        ...state,
+        deletion: false,
+        errorDeletion: action.error
       };
 
     default:

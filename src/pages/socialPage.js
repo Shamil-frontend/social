@@ -13,6 +13,7 @@ import useListData from '../components/wrappers/use-list-data';
 import { fetchSocialGroups } from '../redux/SocialGroups/actions';
 import { socialGroupsSelectors as selectors } from '../redux/selectors';
 
+import './style.css';
 
 const SocialPage = () => {
 
@@ -31,14 +32,16 @@ const SocialPage = () => {
   return (
     <Row >
       <Tab.Container id="left-tabs-example" defaultActiveKey="socialgroup-1">
-        <Row className="p-0">
-          <SocialGroupList socialGroups={socialGroups} />
-          <Col md="auto">
-            <Row className="mb-2">
-              <Col>
+        <Row className="p-0" style={{ flexWrap: "nowrap", width: "80%" }}>
+          <Col className="nav-wrapper">
+            <SocialGroupList socialGroups={socialGroups} />
+          </Col>
+          <Col md="auto" lg="12" xl="12" className>
+            <Row className="mb-2 pt-2 pb-2 search-block" style={{ flexWrap: "nowrap" }}>
+              <Col sm="auto" md="auto" lg="auto" xl="auto" style={{ flexGrow: "11", flexShrink: "0", flexBasis: "auto" }}>
                 <SearchBar onSearchChange={(val) => setValues(val)} values={values} />
               </Col>
-              <Col md="auto">
+              <Col >
                 <AddLivingWages />
               </Col>
             </Row>
