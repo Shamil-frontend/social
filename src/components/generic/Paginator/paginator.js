@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pagination } from 'react-bootstrap';
 
-import './style.css';
+import './paginator.css';
 
 const Paginator = ({ totalItemsCount, portionLimit, pageLimit, activePage, setActivePage }) => {
 
@@ -45,19 +45,19 @@ const Paginator = ({ totalItemsCount, portionLimit, pageLimit, activePage, setAc
   return (
     <Pagination className="m-0">
       {portionNumber > 1 ?
-        <span className="btn btn-primary"
+        <span className="btn btn-light"
           onClick={() => prevPortion(portionNumber)} >&#xab;</span> :
-        <span className="btn btn-primary disabled">&#xab;</span>}
+        <span className="btn btn-light disabled">&#xab;</span>}
 
       {pageItems.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map((item) => {
-        return <span className={`btn btn-primary ${item === itemPage && "btn-primary active"}`}
+        return <span className={`btn btn-light ${item === itemPage && "btn-light active"}`}
           key={item} onClick={() => currentPage(item)}>{item}</span>
       })}
 
       {portionCount > portionNumber ?
-        <span className="btn btn-primary"
+        <span className="btn btn-light"
           onClick={() => nextPortion(portionNumber)} >&#xbb;</span> :
-        <span className="btn btn-primary disabled">&#xbb;</span>}
+        <span className="btn btn-light disabled">&#xbb;</span>}
     </Pagination>
   )
 }

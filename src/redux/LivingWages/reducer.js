@@ -48,7 +48,6 @@ const getLivingWagesReducer = (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         allLivingWages: action.livingWages,
-        // id: action.id
       };
     case FETCH_LIVING_WAGES_FAILURE:
       return {

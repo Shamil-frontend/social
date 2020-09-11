@@ -1,0 +1,21 @@
+.btn-light.disabled, .btn-light.disabled {
+  background-color: #cfcfcf;
+  border: 1px solid #b5b5b6;
+}
+
+.btn-light {
+  background-color: #e9e8e8;
+  border: 1px solid #c8c9cc;
+}
+
+.btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show>.btn-light.dropdown-toggle {
+  color: #222;
+  background-color: #d6d6d6;
+  border: 1px solid #a0a0a1;
+}
+
+.btn-light:hover,
+.btn-light:focus { 
+  margin: 0 !important;
+  border: 1px solid #8f9096 !important;
+}

@@ -32,11 +32,10 @@ const livingWagesRequested = () => {
   }
 };
 
-const livingWagesSuccess = (livingWages, id) => {
+const livingWagesSuccess = (livingWages) => {
   return {
     type: FETCH_LIVING_WAGES_SUCCESS,
     livingWages,
-    id
   }
 };
 
@@ -48,12 +47,10 @@ const livingWagesFailure = (error) => {
 };
 
 const fetchLivingWages = (id) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(livingWagesRequested());
-    return await axios.get(`livingwages/${id}`)
-      .then(response => {
-        dispatch(livingWagesSuccess(response.data));
-      })
+    return axios.get(`livingwages/${id}`)
+      .then(response => dispatch(livingWagesSuccess(response.data)))
       .catch(error => dispatch(livingWagesFailure(error.response.data)));
   }
 };
@@ -126,9 +123,9 @@ const delLivingWagesFailure = (error) => {
 
 const delLivingWages = (itemId, groupId) => {
 
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(delLivingWagesRequested());
-    return await axios.delete(`livingwage/${itemId}`)
+    return axios.delete(`livingwage/${itemId}`)
       .then(response => {
         dispatch(delLivingWagesSuccess());
         if (response.status === 200) {

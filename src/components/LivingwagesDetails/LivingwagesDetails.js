@@ -6,13 +6,13 @@ import { Tab, Table, Form, Col, Row, ButtonGroup } from 'react-bootstrap';
 import LoadingIndicator from '../generic/LoadingIndicator';
 import ErrorIndicator from '../generic/ErrorIndicator';
 import Paginator from '../generic/Paginator/paginator';
-import convertDate from '../../utils/convertDate';
 import DeleteBtn from '../generic/DeleteBtn';
 
-import extractDate from '../../utils/extractDate';
-import { fetchLivingWages } from '../../redux/LivingWages/actions';
+import convertDate from '../../utils/convertDate';
+// import extractDate from '../../utils/extractDate';
+import { fetchLivingWages, delLivingWages } from '../../redux/LivingWages/actions';
 
-import './style.css';
+import './LivingwagesDetails.css';
 
 const LivingwagesDetails = ({ values, setNewValues }) => {
 
@@ -24,7 +24,6 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
     error,
     id
   } = useSelector(({ getLivingWages }) => getLivingWages);
-
 
   const [page, setPage] = useState([]);
   const [activePage, setActivePage] = useState(1);
@@ -77,12 +76,14 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
     showPage(activePage, pageLimit, visibleArray);
   }, [activePage, pageLimit, visibleArray]);
 
-  const deleteItem = (onError) => {
+  const deleteItem = (onError, itemId, groupId) => {
     console.log(onError);
+
+    dispatch(delLivingWages(itemId, groupId));
   };
 
-  const years = visibleArray.map(({ dateStart }) => extractDate(dateStart, 'year')).sort();
-  const months = visibleArray.map(({ dateStart }) => extractDate(dateStart, 'months')).sort();
+  // const years = visibleArray.map(({ dateStart }) => extractDate(dateStart, 'year')).sort();
+  // const months = visibleArray.map(({ dateStart }) => extractDate(dateStart, 'months')).sort();
 
   if (loading) {
     return <LoadingIndicator />;
@@ -95,7 +96,7 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
   return (
     <Tab.Content>
       <Tab.Pane eventKey={`socialgroup-${id}`} className="tab-pane">
-        <Table striped bordered hover className="data-table">
+        <Table hover className="lvgWages-table">
           <colgroup>
             <col />
             <col />
@@ -104,40 +105,13 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
           </colgroup>
           <thead className="thead-block" >
             <tr>
-              <th>
-                <h5>Сортировка</h5>
-              </th>
-              <th>
-                <Form.Group style={{ margin: '10px' }}>
-                  <Form.Label></Form.Label>
-                  <Form.Control as="select" size="sm" custom style={{ display: 'block' }}>
-                    <option disabled >Год</option>
-                    {years.filter((item, index) => years.indexOf(item) === index).map((year, index) => {
-                      return <option key={index} value={year}>{year}</option>
-                    })}
-                  </Form.Control>
-                </Form.Group>
-              </th>
-              <th>
-                <Form.Group style={{ margin: '10px' }}>
-                  <Form.Label></Form.Label>
-                  <Form.Control as="select" size="sm" custom style={{ display: 'block' }} >
-                    <option disabled >Месяц</option>
-                    {months.filter((item, index) => months.indexOf(item) === index).map((month, index) => {
-                      return <option key={index} value={month}>{month}</option>
-                    })}
-                  </Form.Control>
-                </Form.Group>
-              </th>
-              <th rowSpan="2"></th>
-            </tr >
-            <tr>
               <th>Прожиточный минмум</th>
               <th>Дата начала</th>
               <th>Дата окончания</th>
+              <th></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tBody-block">
             <tr>
               <td colSpan="4" className="p-0">
                 <div className="table-wrapper">
@@ -174,8 +148,8 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
           </tbody>
 
         </Table >
-        <Row style={{ justifyContent: "space-between" }} className="pt-2 pb-2 search-block">
-          <Col >
+        <Row style={{ justifyContent: "space-between", flexWrap: "nowrap" }} className="pt-2 pb-2 pagination-block">
+          <Col className="p-0">
             {bool ?
               <Paginator
                 totalItemsCount={visibleArray.length}
@@ -186,7 +160,7 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
               /> :
               null}
           </Col>
-          <Col>
+          <Col className="p-0">
             <Form.Group className="mb-0" style={{ display: 'flex', justifyContent: "flex-end" }}>
               <Form.Label style={{ margin: "0", marginRight: "10px", fontSize: "18px" }}>Number of lines</Form.Label>
               <Form.Control as="select" onChange={(evt) => onChangeSelect(evt)} size="sm" custom style={{ display: 'block', width: "30%", fontSize: "15px" }}>

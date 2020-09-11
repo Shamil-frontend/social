@@ -1,34 +1,37 @@
-import React from 'react';
-import { Row, Col, Card, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-const IndexPage = () => {
+import AppLayout from '../components/AppLayout';
 
-    return (
-        <>
-            <Row sm={12} className='row justify-content-center'>
-                <Alert variant="light">
-                    <Alert.Heading>Вы на главной странице справочника  Соц-услуг.</Alert.Heading>
-                    <p className="mb-0">
-                        Если у вас возникнут вопросы, свяжитесь с технической поддержкой.
-                </p>
-                </Alert>
-            </Row>
-            <Row sm={12} className='row justify-content-center'>
-                <Col sm={4}>
-                    <Card className="text-center">
-                        <Card.Body>
-                            <Card.Title>Список групп</Card.Title>
-                            <Card.Text>
+import LoadingIndicator from '../components/generic/LoadingIndicator';
 
-                            </Card.Text>
-                            <Link className="btn btn-primary btn-block" to="/socialPage">Перейти</Link>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </>
-    )
-}
+const SocialPage = lazy(() => import('./social-page'));
+const AdressesPage = lazy(() => import('./adresses-page'));
+const NotFoundPage = lazy(() => import('./not-found-page'));
+
+const IndexPage = () => (
+  <AppLayout>
+    <Suspense fallback={<LoadingIndicator />}>
+      <Switch>
+        <Redirect from="/" to="/home" exact />
+        <Route path="/home" exact>
+          Главная страница
+        </Route>
+        <Route path="/references/socialPage" exact>
+          <SocialPage />
+        </Route>
+        <Route path="/references/adressesPage" exact>
+          <AdressesPage />
+        </Route>
+
+        <Route>
+          <NotFoundPage />
+        </Route>
+      </Switch>
+    </Suspense>
+  </AppLayout>
+);
+
+
 
 export default IndexPage;

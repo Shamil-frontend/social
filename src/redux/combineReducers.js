@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { getSocialGroupsReducer } from './SocialGroups/getSocialGroupsReducer';
-import { getLivingWagesReducer } from './LivingWages/getLivingWagesReducer';
+import { getSocialGroupsReducer } from './SocialGroups/reducer';
+import { getLivingWagesReducer } from './LivingWages/reducer';
+import { getAdressesReducer } from './Adresses/reducer';
 
 const rootReducer = combineReducers({
   getSocialGroups: getSocialGroupsReducer,
-  getLivingWages: getLivingWagesReducer
+  getLivingWages: getLivingWagesReducer,
+  getAdresses: getAdressesReducer
 });
 
 export default rootReducer;

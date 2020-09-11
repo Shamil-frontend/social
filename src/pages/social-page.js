@@ -20,7 +20,6 @@ const SocialPage = () => {
   const [socialGroups, loading, error] = useListData(fetchSocialGroups, selectors);
   const [values, setValues] = useState("");
 
-
   if (loading) {
     return <LoadingIndicator />
   }
@@ -30,28 +29,30 @@ const SocialPage = () => {
   }
 
   return (
-    <Row >
+    <>
       <Tab.Container id="left-tabs-example" defaultActiveKey="socialgroup-1">
-        <Row className="p-0" style={{ flexWrap: "nowrap", width: "80%" }}>
+        <Row className="m-0">
           <Col className="nav-wrapper">
             <SocialGroupList socialGroups={socialGroups} />
           </Col>
-          <Col md="auto" lg="12" xl="12" className>
-            <Row className="mb-2 pt-2 pb-2 search-block" style={{ flexWrap: "nowrap" }}>
-              <Col sm="auto" md="auto" lg="auto" xl="auto" style={{ flexGrow: "11", flexShrink: "0", flexBasis: "auto" }}>
+          <Col md="12" sm="12" lg="12" xl="12" className="p-0">
+            <Row className="search-block">
+              <Col>
                 <SearchBar onSearchChange={(val) => setValues(val)} values={values} />
               </Col>
-              <Col >
+              <Col style={{ flexGrow: "0" }}>
                 <AddLivingWages />
               </Col>
             </Row>
-            <LivingwagesDetails
-              setNewValues={(val) => setValues(val)}
-              values={values} />
+            <Col >
+              <LivingwagesDetails
+                setNewValues={(val) => setValues(val)}
+                values={values} />
+            </Col>
           </Col>
         </Row>
       </Tab.Container>
-    </Row>
+    </>
   )
 }
 

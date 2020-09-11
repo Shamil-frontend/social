@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 // import ReactDom from 'react-dom';
-import { Col, Nav } from 'react-bootstrap';
+import { Col, Nav, Row } from 'react-bootstrap';
 
 // import useListData from '../wrappers/use-list-data';
 // import { fetchSocialGroups } from '../../redux/SocialGroups/actions';
@@ -28,18 +27,19 @@ const SocialGroupList = ({ socialGroups }) => {
   // }
 
   return (
-    <Col className="nav-block">
-      <Nav variant="pills" className="flex-column">
-        {socialGroups.map(({ id, name }) => (
-          <Nav.Item key={id}>
-            <Nav.Link eventKey={`socialgroup-${id}`} onClick={() => dispatch(setId(id))}>{name}</Nav.Link>
-          </Nav.Item>
-        ))}
-        <Nav.Item>
-          <Link style={{ padding: "8px 16px", display: 'block' }} to='/'>На главную</Link>
-        </Nav.Item>
-      </Nav>
-    </Col>
+    <Row className="nav-block p-0">
+      <Col>
+        <Nav variant="pills">
+          {socialGroups.map(({ id, name }) => (
+            <Nav.Item key={id}>
+              <Nav.Link eventKey={`socialgroup-${id}`}
+                onClick={() => dispatch(setId(id))}
+                to={`socialPage/${id}`} >{name}</Nav.Link>
+            </Nav.Item>
+          ))}
+        </Nav>
+      </Col>
+    </Row>
   )
 }
 

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
+import './style.css';
 
 const SearchBar = ({ onSearchChange, values }) => (
   <Form.Control
-    style={{ backgroundColor: "#faf4f4" }}
+    className="serch-bar"
     type="search"
     value={values}
     placeholder="Search ..."
