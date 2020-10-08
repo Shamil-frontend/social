@@ -1,0 +1,308 @@
+// @import 'custom';
+// Custom Field
+.custom-field {
+  position: relative;
+
+  .form-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    overflow: hidden;
+    width: calc(100% - 28px);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 0;
+    color: #666;
+    cursor: text;
+    font-size: 14px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+    text-overflow: ellipsis;
+    transform-origin: left top;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    will-change: transform;
+    z-index: 10;
+  }
+
+  .form-control {
+    height: 44px;
+    padding: 22px 16px 6px;
+    border-radius: 0;
+    &:disabled {
+      cursor: not-allowed;
+
+      & ~ .form-label {
+        color: rgba(128, 128, 128, 0.5);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .form-control:focus ~ .form-label,
+  &.is-focused .form-label,
+  &.has-value .form-label {
+    width: 100%;
+    transform: translateY(-32%) scale(0.9);
+  }
+
+  &.is-invalid .form-control {
+    border-color: var(--danger);
+  }
+
+  textarea.form-control {
+    height: auto;
+    min-height: 100px;
+
+    & + .form-label {
+      top: 20px;
+      background-color: #ffffff;
+    }
+  }
+}
+
+.invalid-tooltip {
+  right: 0;
+  left: unset;
+}
+
+.is-invalid {
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(186, 21, 21, 0.25);
+  }
+  .invalid-tooltip {
+    display: none;
+  }
+
+  &:hover .invalid-tooltip {
+    display: block;
+  }
+}
+
+// Custom Select2
+.custom-select2 {
+  position: relative;
+
+  .react-select {
+    &__control {
+      height: 44px;
+      border-color: rgb(206, 212, 218);
+      border-radius: 0;
+      cursor: pointer;
+    }
+
+    &__value-container {
+      padding: 10px 10px;
+
+      & > div {
+        &:first-of-type {
+          position: static;
+          margin: 0;
+          line-height: 1;
+          transform: none;
+        }
+
+        &:last-of-type {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+
+    &__single-value {
+      color:  #666;
+    }
+
+    &__placeholder {
+      overflow: hidden;
+      max-width: calc(100% - 8px);
+      color: #666;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &--is-disabled {
+      .react-select__control {
+        background-color: #747073;
+      }
+
+      .react-select__placeholder,
+      & ~ .form-label {
+        color: rgba(128, 128, 128, 0.5);
+      }
+    }
+
+    &__menu {
+      margin-top: 1px;
+      border-radius: 0;
+    }
+  }
+
+  &.is-invalid .react-select__control {
+    border-color: var(--danger);
+    &.css-1pahdxg-control {
+      border-color: var(--danger);
+      box-shadow: 0px 0px 1px 3px  #ff000050 ;
+    }
+  }
+
+  .form-label {
+    position: absolute;
+    top: 3px;
+    left: 16px;
+    overflow: hidden;
+    max-width: calc(100% - 100px);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 0;
+    color:  rgba(128, 128, 128, 0.5);
+    font-size: 11px;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .select2-container--disabled .select2-selection--single .select2-selection__rendered {
+    color:  rgba(128, 128, 128, 0.5);
+  }
+}
+
+.input-group-append + .form-control {
+  margin-left: -1px;
+}
+
+
+
+// Custom Table
+.reference-table {
+  height: 100%;
+}
+
+.thead-block { 
+  background-color: #f3f3f3;
+  font-size: 16px;
+  color: #000000;
+
+  tr { 
+
+    th {
+      border: none !important;
+    }
+
+    th:not(:last-child),
+    th:not(:first-child) {
+      min-width: 0;
+      width: 0%;
+      word-break: break-all;
+    }
+
+    th:last-child {
+      min-width: 95px!important;
+      width: 95px!important;
+      text-align: right;
+    }
+
+    th:first-child {
+      min-width: 40px!important;
+      width: 40px!important;
+    }
+  }
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  background-color: #f3f3f3;
+}
+
+.table-container{
+  width: 100%;
+}
+
+.tBody-block {
+  background-color: #f3f3f3;
+
+  tr {
+
+    td:not(:last-child),
+    td:not(:first-child) {
+      min-width: 0;
+      width: 0%;
+      word-break: break-all;
+    }
+  
+    td:last-child {
+      width: 90px!important;
+      min-width: 90px!important;
+      padding: 0;
+    }
+  
+    td:first-child {
+      min-width: 40px!important;
+      width: 40px!important;
+    }
+  } 
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.table td {
+  padding: 0.65rem 0.75rem;
+}
+
+.table th {
+  padding: 0.55rem 0.75rem;
+}
+
+.btn-edit,
+.btn-delete {
+  border: none !important;
+  background-color: transparent !important;
+  color: #9ba2aa !important;
+  padding: 0px 3px;
+  z-index: 16;
+  & svg  {
+    width: 16px !important;
+    height: 16px !important;  
+  }
+  &:hover {
+    margin: 0 !important;
+    padding: 0px 2px;
+    background-color: transparent !important;
+    color: rgb(255, 7, 7) !important;
+    & svg  {
+      width: 18px !important;
+      height: 18px !important;  
+    }
+  }
+
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.btn-edit {
+  &:hover {
+    color: rgb(39, 170, 177) !important;
+  }
+}
+
+
+.table-scroll::-webkit-scrollbar { width: 5px; height: 3px;} 
+.table-scroll::-webkit-scrollbar-button {  height: 15px; border-radius: 5px; background-color: rgb(175, 172, 172); }
+.table-scroll::-webkit-scrollbar-track {  background-color: #999;}
+.table-scroll::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+.table-scroll::-webkit-scrollbar-thumb { height: 50px; background-color: rgb(216, 213, 213); border-radius: 3px;}
+.table-scroll::-webkit-scrollbar-corner { background-color: #999;}
+.table-scroll::-webkit-resizer { background-color: #666;}

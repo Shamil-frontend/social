@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useListData = (fetchData, selectors) => {
-
+  // console.log(selectors)
   const dispatch = useDispatch();
   const socialGroups = useSelector(selectors.socialGroups);
   const loading = useSelector(selectors.loading);

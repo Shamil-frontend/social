@@ -17,14 +17,16 @@ const INIT_STATE = {
   allLivingWages: [],
   filteredLivingWages: [],
   id: 1,
+
   addedLivingWages: null,
   adding: false,
   errorAdding: null,
+
   deletion: false,
   errorDeletion: null
 };
 
-const getLivingWagesReducer = (state = INIT_STATE, action) => {
+const livingWagesReducer = (state = INIT_STATE, action) => {
 
   switch (action.type) {
 
@@ -100,4 +102,4 @@ const getLivingWagesReducer = (state = INIT_STATE, action) => {
   }
 };
 
-export { getLivingWagesReducer };
+export { livingWagesReducer };

@@ -1,0 +1,20 @@
+.thead-maxcosts { 
+  tr { 
+    th:not(:last-child),
+    th:not(:first-child) {
+      min-width: 180px;
+      width: 33%;
+    }
+  }
+}
+
+.tBody-maxcosts {
+  tr {
+    td:not(:last-child),
+    td:not(:first-child) {
+      min-width: 180px;
+      width: 33%;
+    }
+  }
+}
+

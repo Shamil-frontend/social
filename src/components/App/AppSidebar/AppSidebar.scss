@@ -1,0 +1,117 @@
+// .app-sidebar {
+//   padding-top: 65px;
+// }
+
+.main-nav-item {
+  width: 100%;
+
+  border-bottom: 2px solid #d6d7da !important;
+  font-size: 16px;
+  color: var(--dark);
+
+  &:hover {
+    background-color: rgba($color: #b8c0ca, $alpha: 0.4);
+  }
+}
+
+.main-nav-link {
+  height: 85px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item-label {
+  margin: 0;
+  padding: 0px 12px;
+
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--dark);
+}
+
+.btn-link {
+
+  width: 100%;
+  margin: 0 !important;
+  padding: 0;
+  outline-color: none !important;
+  border: 0 !important;
+  text-align: left;
+  font-size: 16px;
+  box-shadow: none !important;
+  background-color: #fff !important;
+  color: var(--primary) !important;
+  text-decoration: none !important;
+
+  &>span {
+    text-transform: capitalize;
+  }
+
+  &:hover {
+    background-color: #d5dce6b9 !important;
+    text-decoration: underline !important;
+  }
+}
+
+.active- {
+
+  &nav {
+    box-shadow: none !important;
+    background-color: #d5dce6b9 !important;
+    color: var(--primary) !important;
+
+    & span svg { 
+      color:#329de8 !important; 
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: #0b64ad;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.not-active- {
+
+  &nav {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    color: var(--dark) !important;
+
+    & span svg { 
+      color: rgb(114, 131, 143) !important; 
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: transparent;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+
+
+
+

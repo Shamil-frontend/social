@@ -1,3 +1,3 @@
-import SocialGroupList from './SocialGroupList'
+import SocialGroupsList from './SocialGroupsList';
 
-export default SocialGroupList;
+export default SocialGroupsList;

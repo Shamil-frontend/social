@@ -76,7 +76,8 @@ const addLivingWagesFailure = (error) => {
   }
 };
 
-const addLivingWages = (values, socialGroupsId, id) => {
+const addLivingWages = (values, socialGroupsId) => {
+  console.log("socialGroupsId", socialGroupsId)
   const array = Object.entries(values)
     .filter((item) => typeof item[1] !== 'object')
     .map(([, value], index) => {
@@ -95,45 +96,52 @@ const addLivingWages = (values, socialGroupsId, id) => {
       return axios.post(`livingwage`, formData)
         .then(response => {
           dispatch(addLivingWagesSuccess(response.data));
-          dispatch(fetchLivingWages(id));
+          return 'Успешно добавлен';
         })
-        .catch(error => dispatch(addLivingWagesFailure(error.response.data)));
+        .catch(error => {
+          dispatch(addLivingWagesFailure(error.response.data));
+          throw Error;
+        });
     }))
   };
 };
 // Удаление элемента
-const delLivingWagesRequested = () => {
+const deleteLivingWagesRequested = () => {
   return {
     type: LIVING_WAGES_DEL_REQUESTED
   }
 };
 
-const delLivingWagesSuccess = () => {
+const deleteLivingWagesSuccess = () => {
   return {
     type: LIVING_WAGES_DEL_SUCCESS,
   }
 };
 
-const delLivingWagesFailure = (error) => {
+const deleteLivingWagesFailure = (error) => {
   return {
     type: LIVING_WAGES_DEL_FAILURE,
     error
   }
 };
 
-const delLivingWages = (itemId, groupId) => {
+const deleteLivingWages = (itemId, groupId) => {
 
   return (dispatch) => {
-    dispatch(delLivingWagesRequested());
+    dispatch(deleteLivingWagesRequested());
     return axios.delete(`livingwage/${itemId}`)
       .then(response => {
-        dispatch(delLivingWagesSuccess());
+        dispatch(deleteLivingWagesSuccess());
         if (response.status === 200) {
           dispatch(fetchLivingWages(groupId));
+          return 'Успешно удален';
         }
       })
-      .catch(error => dispatch(delLivingWagesFailure(error.response.data)));
+      .catch(error => {
+        dispatch(deleteLivingWagesFailure(error.response.data));
+        throw Error;
+      });
   }
 };
 
-export { setId, fetchLivingWages, addLivingWages, delLivingWages };
+export { setId, fetchLivingWages, addLivingWages, deleteLivingWages };

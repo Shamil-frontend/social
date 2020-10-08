@@ -5,7 +5,7 @@ import { useField } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 
-const CustomSelect = ({ name, data, label, placeholder, isLoading, isDisabled, onChange }) => {
+const CustomSelect = ({ defaultValue, name, data, label, placeholder, isLoading, isDisabled, onChange, isMulti }) => {
   const [field, meta, helpers] = useField(name);
 
   let classNames = 'custom-select2';
@@ -18,6 +18,8 @@ const CustomSelect = ({ name, data, label, placeholder, isLoading, isDisabled, o
     <div className={classNames}>
       <Form.Label>{label}</Form.Label>
       <Select
+        defaultValue={defaultValue}
+        isMulti={isMulti}
         classNamePrefix="react-select"
         name={field.name}
         options={data}
@@ -43,6 +45,8 @@ const CustomSelect = ({ name, data, label, placeholder, isLoading, isDisabled, o
 };
 
 CustomSelect.defaultProps = {
+  defaultValue: [],
+  isMulti: false,
   data: [],
   placeholder: 'Выберите из вариантов',
   isLoading: false,
@@ -51,6 +55,8 @@ CustomSelect.defaultProps = {
 };
 
 CustomSelect.propTypes = {
+  defaultValue: PropTypes.array,
+  isMulti: PropTypes.bool,
   name: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
   label: PropTypes.string.isRequired,

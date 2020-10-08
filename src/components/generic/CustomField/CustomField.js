@@ -7,7 +7,7 @@ import MaskedInput from 'react-text-mask';
 
 import inputMasksMap from '../../../utils/inputMasksMap';
 
-const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut }) => {
+const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut, pattern, min, max, maxLength }) => {
   const [field, meta] = useField(name);
 
   let classNames = 'custom-field';
@@ -45,6 +45,10 @@ const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut }) =>
       ) : (
           <Form.Control
             type={type}
+            pattern={pattern}
+            min={min}
+            max={max}
+            maxLength={maxLength}
             as={as}
             id={field.id}
             name={field.name}

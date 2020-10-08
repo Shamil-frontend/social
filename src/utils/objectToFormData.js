@@ -8,7 +8,7 @@ const objectToFormData = (values) => {
     if (value || value === 0) {
       if (isDateField(value)) {
         formData.set(key, value.toISOString());
-      } else if (typeof value === 'object') {
+      } else if (typeof value === 'object' && !(value instanceof Array)) {
         if (isSelectField(value)) {
           formData.set(key, value.value);
         } else {
@@ -18,6 +18,10 @@ const objectToFormData = (values) => {
             }
           });
         }
+      } else if (value instanceof Array) {
+        value.forEach((it, idx) => {
+          formData.set(`${key}[${idx}]`, it.value)
+        })
       } else {
         formData.set(key, value);
       }

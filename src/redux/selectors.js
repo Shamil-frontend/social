@@ -1,6 +1,6 @@
-const socialGroups = state => state.getSocialGroups.socialGroups;
-const socialGroupsLoading = state => state.getSocialGroups.loading;
-const socialGroupsError = state => state.getSocialGroups.error;
+const socialGroups = state => state.socialGroups.socialGroups;
+const socialGroupsLoading = state => state.socialGroups.loading;
+const socialGroupsError = state => state.socialGroups.error;
 const socialGroupsSelectors = {
   socialGroups,
   loading: socialGroupsLoading,
@@ -8,13 +8,22 @@ const socialGroupsSelectors = {
 };
 
 
-const livingWages = state => state.getLivingWages.allLivingWages;
-const livingWagesLoading = state => state.getLivingWages.loading;
-const livingWagesError = state => state.getLivingWages.error;
+const livingWages = state => state.livingWages.allLivingWages;
+const livingWagesLoading = state => state.livingWages.loading;
+const livingWagesError = state => state.livingWages.error;
 const livingWagesSelectors = {
   livingWages,
   loading: livingWagesLoading,
   error: livingWagesError
 };
 
-export { socialGroupsSelectors, livingWagesSelectors };
+const addresses = state => state.addresses.addressesData;
+const addressesLoading = state => state.addresses.loading;
+const addressesError = state => state.addresses.error;
+const addressesSelectors = {
+  addresses,
+  loading: addressesLoading,
+  error: addressesError
+};
+
+export { socialGroupsSelectors, livingWagesSelectors, addressesSelectors };

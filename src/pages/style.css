@@ -1,17 +1,46 @@
-.search-block,
-.pagination-block {
-  background-color: #ffffff;
-}
+.wrapper-page {
+  flex-direction: column;
+  flex-wrap: nowrap;
 
-.search-block {
-  flex-wrap: nowrap; 
-  justify-content: space-between;
-  
-  padding: 5px 0;
+  height: 100%;
   margin: 0;
-  margin-bottom: 5px; 
 }
 
+.socialgroups-wrapper {
+  min-width: 750px;
+}
+
+.addresses-wrapper {
+  min-width: 750px;
+}
+
+.orgstructures-wrapper {
+  min-width: 860px;
+}
+
+.Jobpositions-wrapper {
+  min-width: 670px;
+}
+
+.roles-wrapper {
+  min-width: 670px;
+}
+
+.employees-wrapper {
+  min-width: 860px;
+}
+
+.relations-wrapper {
+  min-width: 670px;
+}
+
+.banks-wrapper {
+  min-width: 860px;
+}
+
+.maxcosts-wrapper {
+  min-width: 670px;
+}
 
 .pagination-block {
   margin: 0;
@@ -20,7 +49,8 @@
 .nav-wrapper {
   width: 100%;
   padding: 5px 0; 
+  margin: 0;
   margin-bottom: 5px;
-
-  background-color: #ffffff;
 }
+
+

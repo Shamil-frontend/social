@@ -1,0 +1,28 @@
+.tab-pane {
+  height: inherit;
+}
+
+.lvg-wages-table {
+  height: calc(100% - 32px);
+}
+
+.thead-livingwage { 
+  tr { 
+    th:not(:last-child),
+    th:not(:first-child) {
+      min-width: 205px;
+      width: 33%;
+    }
+  }
+}
+
+.tBody-livingwage {
+  tr {
+    
+    td:not(:last-child),
+    td:not(:first-child) {
+      min-width: 205px;
+      width: 33%;
+    }
+  }
+}

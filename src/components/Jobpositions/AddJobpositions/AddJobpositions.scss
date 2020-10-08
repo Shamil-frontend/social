@@ -1,0 +1,18 @@
+.add-jopPos-modal .modal-dialog {
+  max-width: 600px;
+}
+
+.form-group-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  & > * {
+    padding: 0;
+    padding-left: 2px;
+  }
+  & > *:nth-child(odd) {
+    padding: 0;
+    padding-right: 2px;
+  }
+}

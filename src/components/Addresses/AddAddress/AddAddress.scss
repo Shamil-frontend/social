@@ -1,0 +1,46 @@
+.add-address-modal .modal-dialog {
+  max-width: 600px;
+}
+
+.adress-add-btn {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 !important;
+  padding: 5px 10px;
+  border: 0 !important;
+  box-shadow: none !important;
+  background-color: #fff !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    width: 16px;
+    height: 3px;
+    top: calc(50% - 2px);
+    left: calc(50% - 8px);
+
+    background-color: #3590e6;
+    transform: rotate(90deg);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+
+    width: 16px;
+    height: 3px;
+    top: calc(50% - 2px);
+    left: calc(50% - 8px);
+    
+    background-color: #3590e6;
+  }
+
+  &:not(:disabled):hover {
+    height: 28px;
+    margin-bottom: 2px;
+    background-color: #d5dfec !important;
+    text-decoration: underline !important;
+  }
+}

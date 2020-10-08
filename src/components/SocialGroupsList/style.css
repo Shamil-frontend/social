@@ -1,16 +1,16 @@
 
-.nav-item a:hover { 
+.socialgroup-nav-item a:hover { 
   text-decoration: none;
   color: #0a4064 !important;
   text-shadow: 0 0 1px rgb(36, 111, 209);
 }
 
-.nav-item:hover,
-.nav-item:focus { 
+.socialgroup-nav-item:hover,
+.socialgroup-nav-item:focus { 
   border-radius: 0px;
 }
 
-.nav-item a { 
+.socialgroup-nav-item a { 
   position: relative;
   font-size: 16px;
   color: #000000;
@@ -35,10 +35,10 @@
   background-color: #1e6a9c;
 }
 
-
 .nav-block {
   margin: 0;
-  border-radius: 3px 3px 0px 0px;
-  padding-right: 15px;
-  padding-left: 15px;
+}
+
+.socialgroup-nav-list {
+  border-radius: 5px;
 }

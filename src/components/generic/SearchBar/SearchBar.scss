@@ -1,0 +1,32 @@
+.serchBar-wrapper {
+  position: relative;
+}
+
+.icon-serchBar {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: 10px;
+
+  & svg {
+    color: #bebdbd;
+  }
+}
+
+.serch-bar {
+  height: 35px;
+  padding-left: 30px;
+  border-radius: 15px;
+  background-color: #faf4f4;
+  box-shadow:  0 0 2px 2px rgba(169, 172, 173, 0.3);
+}
+
+.acitveClass {
+  &-icon svg {
+    color: #61c6ed;
+  }
+
+  &-serch {
+    border: 2px solid #a0cee0 !important;
+    box-shadow: 0 0 0 0.2rem rgba(21,140,186,0.25);
+  }
+}

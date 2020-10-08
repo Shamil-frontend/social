@@ -1,0 +1,60 @@
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
+  // background-color: #e9eaf0;
+}
+
+.header-section {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+
+  background-color: rgb(21, 50, 72);
+}
+
+.navigation-section {
+  position: fixed;
+  width: 100px;
+  height: calc(100vh - 50px);
+
+  margin-top: 50px;
+  
+  background-color: rgb(237, 243, 245);
+  box-shadow: 0 0 8px 1px rgba(0,0,0,0.10), 6px 0 10px 3px rgba(0,0,0,0.08);
+}
+
+.nestedNav-section {
+  position: fixed;
+  width: 230px;
+  height: calc(100vh - 50px);
+
+  margin-top: 50px;
+  margin-left: 100px;
+
+  border-left: 1px solid rgb(221, 216, 216);
+  background-color: rgb(237, 243,245);
+  box-shadow: 6px 0 5px 1px rgba(0,0,0,0.05), 6px 0 10px 4px rgba(0,0,0,0.04);
+  z-index: 100;
+}
+
+.main-section {
+  position: fixed;
+  min-width: 490px;
+  width: calc(100% - 150px);
+  height: calc(100vh - 85px);
+
+  margin-top: 65px;
+  margin-bottom: 20px;
+  margin-left: 125px;
+  margin-right: 25px;
+  // background-color: rgb(237, 243, 245);
+}
+
+.main-content {
+  height: inherit;
+  &-body {
+    height: inherit;
+  }
+}

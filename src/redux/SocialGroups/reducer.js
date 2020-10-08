@@ -10,7 +10,7 @@ const INIT_STATE = {
   socialGroups: []
 };
 
-const getSocialGroupsReducer = (state = INIT_STATE, action) => {
+const socialGroupsReducer = (state = INIT_STATE, action) => {
 
   switch (action.type) {
 
@@ -38,4 +38,4 @@ const getSocialGroupsReducer = (state = INIT_STATE, action) => {
 };
 
 
-export { getSocialGroupsReducer };
+export { socialGroupsReducer };

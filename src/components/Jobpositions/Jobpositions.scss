@@ -1,0 +1,21 @@
+.thead-jobpos { 
+  tr { 
+    th:not(:last-child),
+    th:not(:first-child) {
+      min-width: 145px;
+      width: 100%;
+    }
+  }
+}
+
+.tBody-jobpos {
+  tr {
+    
+    td:not(:last-child),
+    td:not(:first-child) {
+      min-width: 145px;
+      width: 100%;
+    }
+  }
+}
+
