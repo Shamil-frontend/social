@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useField } from 'formik';
@@ -7,19 +7,19 @@ import MaskedInput from 'react-text-mask';
 import ReactDatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
-import './style.css'
 
 import inputMasksMap from '../../../utils/inputMasksMap';
+
+import './DatePicker.scss';
 
 registerLocale('ru', ru);
 setDefaultLocale('ru');
 
-const DatePicker = ({ name, label, isDisabled }) => {
-  const [isFocused, setIsFocused] = useState(false);
-
+const DatePicker = ({ name, label, minDate, isDisabled }) => {
+  const [isFocused, setIsFocused] = React.useState(false);
   const [field, meta, helpers] = useField(name);
 
-  let classNames = 'custom-field';
+  let classNames = 'custom-date-picker';
 
   if (field.value) {
     classNames += ' has-value';
@@ -35,7 +35,6 @@ const DatePicker = ({ name, label, isDisabled }) => {
 
   return (
     <div className={classNames}>
-      <Form.Label className="mr-2">{label}</Form.Label>
       <ReactDatePicker
         id={field.name}
         name={meta.name}
@@ -47,12 +46,13 @@ const DatePicker = ({ name, label, isDisabled }) => {
           return field.onBlur(evt);
         }}
         dateFormat="dd.MM.yyyy"
+        minDate={minDate}
         disabled={isDisabled}
         autoComplete="off"
         customInput={<MaskedInput className="form-control" mask={inputMasksMap.date} />}
       />
 
-
+      <Form.Label>{label}</Form.Label>
       <Form.Control.Feedback className="invalid-tooltip" type="invalidd">
         {meta.error}
       </Form.Control.Feedback>
@@ -60,14 +60,16 @@ const DatePicker = ({ name, label, isDisabled }) => {
   );
 };
 
+DatePicker.defaultProps = {
+  isDisabled: false,
+  minDate: null,
+};
+
 DatePicker.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
-};
-
-DatePicker.defaultProps = {
-  isDisabled: false,
+  minDate: PropTypes.instanceOf(Date),
 };
 
 export default DatePicker;

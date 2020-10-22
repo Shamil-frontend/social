@@ -14,9 +14,10 @@ import CustomSelect from '../../generic/CustomSelect';
 import CustomField from '../../generic/CustomField';
 import SubmitBtn from '../../generic/SubmitBtn/SubmitBtn';
 
-import { fetchRoles, fetchEmployees, addEmployee } from '../../../redux/Employees/actions';
+import { fetchEmployees, addEmployee } from '../../../redux/Employees/actions';
 import { fetchOrgstructures } from '../../../redux/Orgstructures/actions';
 import { fetchJobpositions } from '../../../redux/Jobpositions/actions';
+import { fetchRoles } from '../../../redux/Roles/actions';
 import validationSchemaLocale from '../../../utils/validationSchemaLocale';
 import useAddItem from '../../wrappers/use-add-item';
 
@@ -62,21 +63,6 @@ const initialValues = {
   roleId: null,
 };
 
-// {
-//   "id": "6c7a1958-1386-4a8b-8e5e-9e390ed2a9df",
-//   "jobPositionId": "9463785a-14a2-4f1a-aba4-379523121f95",
-//   "jobPosition": "Директор",
-//   "orgStructureName": "Отдел разработки ПО",
-//   "orgStructureId": "fcfa5238-d075-492b-852d-9360a9409776",
-//   "roleId": 2,
-//   "roleName": "Programmer",
-//   "fio": "Зинедин Зидан",
-//   "phoneNumber1": "9880003322",
-//   "phoneNumber2": "32132131232",
-//   "email": "sd@sd.sd",
-//   "isActive": true,
-//   "login": "eldorado"
-// }
 
 const AddEmployees = () => {
 
@@ -96,13 +82,13 @@ const AddEmployees = () => {
 
   const { adding } = useSelector(({ employees }) => employees);
 
-  const employees = useSelector(({ employees }) => ({
-    data: employees.rolesList.map(({ id, nameRus }) => ({
+  const roles = useSelector(({ roles }) => ({
+    data: roles.rolesList.map(({ id, nameRus }) => ({
       value: id,
       label: nameRus,
     })),
-    loading: employees.rolesLoading,
-    error: employees.rolesError,
+    loading: roles.rolesLoading,
+    error: roles.rolesError,
   }));
 
   const orgstructures = useSelector(({ orgstructures }) => ({
@@ -202,9 +188,9 @@ const AddEmployees = () => {
                       name="roleId"
                       placeholder="Роль сотрудника"
                       label="Роль сотрудника"
-                      data={employees.data}
-                      isLoading={employees.loading}
-                      isDisabled={employees.error}
+                      data={roles.data}
+                      isLoading={roles.loading}
+                      isDisabled={roles.error}
                     />
                   </Form.Group>
                   <Form.Group as={Col} xs={6}>
@@ -241,7 +227,7 @@ const AddEmployees = () => {
                     <CustomField
                       type="string"
                       name="phoneNumber2"
-                      label="Запасной телефон:"
+                      label="Дополнительный телефон:"
                       mask="tel" />
                   </Form.Group>
                 </Form.Row>

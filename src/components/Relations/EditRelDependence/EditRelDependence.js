@@ -22,15 +22,17 @@ import useEditItem from '../../wrappers/use-edit-item';
 setLocale(validationSchemaLocale);
 
 const formValidationSchema = object().shape({
-  'relation.Id': string().required(),
-  'relation.Name': string().required(),
-  'relation.IsNear': object().nullable().required(),
-  'relationIdDependences': array().nullable(),
+  relation: object().shape({
+    id: string().required(),
+    name: string().required(),
+    isNear: object().nullable().required(),
+  }),
+  relationIdDependences: array().nullable(),
 });
 
 const EditRelDependence = ({ item, togglerModal, onModalClose }) => {
 
-  const { relation = '', relationDependences = [] } = item;
+  const { relation = {}, relationDependences = [] } = item;
 
   const dispatch = useDispatch();
   const [isModalOpen, openModal, closeModal, editItem] = useEditItem(editRelDependence, () => fetchRelDependences())
@@ -57,16 +59,17 @@ const EditRelDependence = ({ item, togglerModal, onModalClose }) => {
     error: relations.relationsError,
   }));
 
+
   const initialValues = {
-    'relation.Id': relation.id,
-    'relation.Name': relation.name,
-    'relation.IsNear': {
-      value: relation.isNear,
-      label: relation.isNear ? "Ближайший" : "Неближайший"
+    relation: {
+      id: relation.id,
+      name: relation.name,
+      isNear: {
+        value: relation.isNear,
+        label: relation.isNear ? 'Ближайший' : 'Неближайший'
+      },
     },
-    'relationIdDependences': relationDependences ?
-      relationDependences.map(({ id, name }) => ({ value: id, label: name })) :
-      []
+    'relationIdDependences': relationDependences.map(({ id, name }) => ({ value: id, label: name }))
   };
 
 
@@ -107,12 +110,12 @@ const EditRelDependence = ({ item, togglerModal, onModalClose }) => {
               }}
             >
               <Form.Row>
-                <Form.Group as={Col} xs={6} controlId="relation.Name">
-                  <CustomField name="relation.Name" label="Наименование Физ.лица" />
+                <Form.Group as={Col} xs={6} controlId="relation.name">
+                  <CustomField name="relation.name" label="Наименование Физ.лица" />
                 </Form.Group>
                 <Form.Group as={Col} xs={6}>
                   <CustomSelect
-                    name="relation.IsNear"
+                    name="relation.isNear"
                     label="Ближайщий родственик"
                     data={statusIndividual}
                   />

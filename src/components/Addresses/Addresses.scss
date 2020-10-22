@@ -7,22 +7,6 @@
 }
 
 .addresses-top-block {
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  margin: 0;
-}
-
-.serchBar-block {
-  flex-grow: 1;
-  padding: 0;
-}
-
-.select-block {
-  flex-grow: 2;
-  padding: 0;
-}
-
-.select-wrapper {
   display: flex;
   flex-direction: row;
 }
@@ -41,11 +25,19 @@
   line-height: 30px;
 }
 
+
+
+
 .addresses-btm-block {
   flex-wrap: nowrap;
   flex-grow: 1;
   margin: 0;
-  padding: 0 ;
+  padding: 0;
+}
+
+.serchBar-block {
+  flex-grow: 1;
+  padding: 0;
 }
 
 .addresses-column {
@@ -67,6 +59,12 @@
     &:last-child {
       border-right: 1px solid rgb(206, 201, 201);
     }
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
   }
 
 }

@@ -19,7 +19,7 @@ import {
 const INIT_STATE = {
   errorReg: null,
   loadingReg: true,
-  addressesRegions: [],
+  regionsList: [],
 
   errorChilds: null,
   loadingChilds: true,
@@ -57,7 +57,7 @@ const addressesReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         loadingReg: false,
-        addressesRegions: action.data
+        regionsList: action.data
       };
     case FETCH_ADDRESSES_REGIONS_FAILURE:
       return {

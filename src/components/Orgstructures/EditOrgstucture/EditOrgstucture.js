@@ -152,7 +152,7 @@ const EditOrgstucture = ({ item, togglerModal, onModalClose }) => {
                   <CustomField type="string" name="phoneNumber1" label="Основной тел. организации" />
                 </Form.Group>
                 <Form.Group as={Col} xs={6} controlId="phoneNumber2">
-                  <CustomField type="string" name="phoneNumber2" label="Запасной тел. организации" />
+                  <CustomField type="string" name="phoneNumber2" label="Дополнительный тел. организации" />
                 </Form.Group>
               </Form.Row>
             </Form>

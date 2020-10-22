@@ -77,7 +77,7 @@ const EditRoles = ({ item, togglerModal, onModalClose }) => {
                 </Form.Group>
 
                 <Form.Group as={Col} xs={2} controlId="rang">
-                  <CustomField name="rang" label="Ранг" />
+                  <CustomField type="number" name="rang" label="Ранг" />
                 </Form.Group>
               </Form.Row>
               <Form.Group controlId="nameRus">

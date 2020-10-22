@@ -1,0 +1,53 @@
+.add-standard-modal .modal-dialog {
+  max-width: 900px;
+  overflow: hidden;
+}
+
+form {
+  height: 600px;
+}
+
+.reference-table {
+  height: 100%;
+}
+
+.thead-addStandards { 
+  tr { 
+    th:not(:last-child),
+    th:not(:first-child) {
+      min-width: 145px;
+      width: 30%;
+    }
+
+    th:nth-child(2) {
+      width: 12%;
+      min-width: 162px;
+    }
+
+    th:nth-child(3) {
+      width: 19%;
+      min-width: 162px;
+    }
+
+  }
+}
+
+.tBody-addStandards {
+  tr {
+    td:not(:last-child),
+    td:not(:first-child) {
+      min-width: 145px;
+      width: 30%;
+    }
+
+    td:nth-child(2) {
+      width: 12%;
+      min-width: 162px;
+    }
+
+    td:nth-child(3) {
+      width: 19%;
+      min-width: 160px;
+    }
+  }
+}

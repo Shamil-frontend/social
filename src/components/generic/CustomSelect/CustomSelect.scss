@@ -1,0 +1,119 @@
+.custom-select2 {
+  position: relative;
+
+  .react-select {
+    &__control {
+      height: 44px;
+      border-color: rgb(206, 212, 218);
+      border-radius: 0;
+      cursor: pointer;
+
+      &--is-focused {
+        border-color: #61c6ed;
+        box-shadow: 0 0 0 0.2rem rgba(21,140,186,0.25);
+      }
+    }
+
+    &__value-container {
+      padding: 10px 10px;
+
+      & > div {
+        &:first-of-type {
+          position: static;
+          margin: 0;
+          line-height: 1;
+          transform: none;
+        }
+
+        &:last-of-type {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+
+    &__single-value {
+      position: static;
+      margin: 0;
+      color:  #666;
+      line-height: 1;
+      transform: none;
+    }
+
+    &__placeholder {
+      overflow: hidden;
+      max-width: calc(100% - 8px);
+      color: #666;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &--is-disabled {
+      .react-select__control {
+        background-color: #e4e4e4;
+      }
+
+      & ~ .form-label {
+        color: rgba(128, 128, 128, 0.5);
+        cursor: default;
+      }
+    }
+
+    &__menu {
+      margin-top: 1px;
+      border-radius: 0;
+    }
+  }
+
+  .css-1pahdxg-control:hover {
+    border-color: #61c6ed;
+    box-shadow: 0 0 0 0.2rem rgba(21,140,186,0.25);
+  }
+
+  &.is-invalid .react-select__control {
+    
+    border-color: var(--danger) !important;
+
+    &--is-focused {
+      box-shadow: var(--danger);
+      border-color: var(--danger) ;
+    }
+    &.css-1pahdxg-control {
+      border-color: var(--danger) ;
+      box-shadow: 0px 0px 1px 3px  #ff000050 ;
+    }
+  }
+
+  .form-label {
+    position: absolute;
+    top: 13px;
+    left: 16px;
+    overflow: hidden;
+    width: calc(100% - 100px);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 0;
+    color:  rgba(128, 128, 128, 0.5);
+    cursor: pointer;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+    text-overflow: ellipsis;
+    transform-origin: left top;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    will-change: transform;
+  }
+
+  .select2-container--disabled .select2-selection--single .select2-selection__rendered {
+    color:  rgba(128, 128, 128, 0.5);
+  }
+
+  &.is-focused .form-label,
+  &.has-value .form-label {
+    width: 100%;
+    transform: translateY(-32%) scale(0.7);
+  }
+}

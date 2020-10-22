@@ -35,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "svgSprite": "svgo -f src/images/icons --config=svgo-config.json && svgstore src/images/icons/*.svg -o src/images/sprite.svg --inline"
   },
   "eslintConfig": {
     "extends": "react-app"

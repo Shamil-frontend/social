@@ -202,7 +202,7 @@ const Addresses = () => {
     }
   };
 
-  const deleteItem = (onError, itemId, itemParentId, itemAddressName) => dispatch(deleteAddress(itemId, itemParentId, itemAddressName));
+  const deleteItem = (onError, itemId, firstValue, SecondValue) => dispatch(deleteAddress(itemId, firstValue, SecondValue));
 
   useEffect(() => {
     dispatch(fetchAddressesReg());
@@ -219,32 +219,28 @@ const Addresses = () => {
   return (
     <>
       <div className="addresses-container">
-        <Row className="addresses-top-block">
-          <Col className="select-block">
-            <FormGroup className="select-wrapper">
-              <Form.Control className="select-adresses" as="select" onChange={(evt) => { getChildsAddresses(evt.target.value, 'cities'); onClearColumItems() }} size="sm" custom>
-                <option></option>
-                {addresses.addressesRegions.map(({ offName, id }) => (
-                  <option key={id} value={id} >{offName}</option>
-                ))}
-              </Form.Control>
-              <FormLabel className="select-label">Регионы РФ</FormLabel>
-            </FormGroup>
-          </Col>
-        </Row>
+        <FormGroup className="addresses-top-block">
+          <Form.Control className="select-adresses" as="select" onChange={(evt) => { getChildsAddresses(evt.target.value, 'cities'); onClearColumItems() }} size="sm" custom>
+            <option></option>
+            {addresses.regionsList.map(({ offName, id }) => (
+              <option key={id} value={id} >{offName}</option>
+            ))}
+          </Form.Control>
+          <FormLabel className="select-label">Регионы РФ</FormLabel>
+        </FormGroup>
 
         <Row className="addresses-btm-block">
           {ADDRESS_COLUMNS.map(({ title, data, nextName, addressName, addressLevelId, addBtn, viewBtn, editBtn, deleteBtn }) => {
             return (
               <Col className="addresses-column-wrapper" key={addressName}>
-                <Row className="m-0 justify-content-between flex-nowrap">
+                <div className="addresses-column-header">
                   <h4 className="addresses-column-tittle">{title}</h4>
                   {addBtn ?
                     <AddAddress isDisabled={!parentIds[addressName]} typeAddress={addressName} parentIds={parentIds} addressLevelId={addressLevelId} />
                     :
                     null
                   }
-                </Row>
+                </div>
                 <Col className="serchBar-block">
                   <SearchBar onSearchChange={(value) => onSearchChange(value, addressName)} value={searchValue[addressName]} />
                 </Col>
@@ -292,20 +288,21 @@ const Addresses = () => {
           })}
         </Row>
       </div >
-      <DeleteBtn
-        onDelete={deleteItem}
-        togglerModal={!closeDeleteModal}
-        itemId={curentItem.id}
-        itemParentId={curentItem.parentId}
-        itemAddressName={curentAddressName}
-        onModalClose={(bool) => setCloseDeleteModal(bool)} />
-
       <EditAddress
         item={curentItem}
         togglerModal={closeEditModal}
         onModalClose={(bool) => setCloseEditModal(bool)}
         parentIds={parentIds}
         typeAddress={curentAddressName} />
+
+      <DeleteBtn
+        onDelete={deleteItem}
+        togglerModal={closeDeleteModal}
+        itemId={curentItem.id}
+        firstValue={curentItem.parentId}
+        SecondValue={curentAddressName}
+        onModalClose={(bool) => setCloseDeleteModal(bool)} />
+
     </>
   )
 }

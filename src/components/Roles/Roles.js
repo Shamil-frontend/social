@@ -23,7 +23,7 @@ const Roles = ({ value }) => {
   const [filteredRoles, setFilteredRoles] = useState([]);
 
   const dispatch = useDispatch();
-  const { error, loading, roleList } = useSelector(({ roles }) => roles);
+  const { error, loading, rolesList } = useSelector(({ roles }) => roles);
 
   const onSearchChange = (search, data) => {
     if (!search) {
@@ -34,7 +34,8 @@ const Roles = ({ value }) => {
     }
   };
 
-  const visibleData = value ? filteredRoles : roleList;
+
+  const visibleData = value ? filteredRoles : rolesList;
   const deleteItem = (onError, itemId) => dispatch(deleteRoles(itemId));
 
   useEffect(() => {
@@ -42,8 +43,8 @@ const Roles = ({ value }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    onSearchChange(value, roleList)
-  }, [value, roleList]);
+    onSearchChange(value, rolesList)
+  }, [value, rolesList]);
 
   if (loading) {
     return <LoadingIndicator />;
@@ -61,21 +62,24 @@ const Roles = ({ value }) => {
           <col />
           <col />
           <col />
+          <col />
         </colgroup>
         <thead className="thead-block thead-roles" >
           <tr>
             <th>№</th>
             <th>Наименование роли</th>
-            <th>Роль / Ранг</th>
+            <th>Роль</th>
+            <th>Ранг</th>
             <th>Действия</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td colSpan="4" className="p-0">
+            <td colSpan="5" className="p-0">
               <div className="table-wrapper table-scroll">
                 <table className="table-container">
                   <colgroup>
+                    <col />
                     <col />
                     <col />
                     <col />
@@ -88,7 +92,8 @@ const Roles = ({ value }) => {
                         <tr key={id}>
                           <td>{index + 1}</td>
                           <td>{nameRus}</td>
-                          <td>{`${name} / ${rang}`}</td>
+                          <td>{name}</td>
+                          <td>{rang}</td>
                           <td >
                             <div className="btn-wrapper">
                               <Button className="btn-edit" onClick={() => {

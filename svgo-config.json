@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    {
+      "sortAttrs": true
+    },
+    {
+      "removeDimensions": true
+    },
+    {
+      "removeAttrs": {
+        "attrs": "(stroke|fill)"
+      }
+    }
+  ]
+}

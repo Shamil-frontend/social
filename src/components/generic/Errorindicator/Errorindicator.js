@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
 
 const ErrorIndicator = ({ error }) => {
+  if (!error) {
+    return <Alert variant="danger">Ошибка сервера нах</Alert>;
+  }
   if (error.response) {
     const { data, status, statusText } = error.response;
     // The request was made and the server responded with a status code

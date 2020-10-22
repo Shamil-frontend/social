@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import SearchBar from '../../components/generic/SearchBar';
-// import AddCommunal from '../../components/Communal/AddCommunal';
-// import Communal from '../../components/Communal';
+import AddCommunal from '../../components/Communal/AddCommunal';
+import Communal from '../../components/Communal';
 import ReferenceTitle from '../../components/generic/ReferenceTitle/ReferenceTitle';
 
 import '../style.css';
@@ -21,11 +21,11 @@ const CommunalPage = () => {
           <SearchBar onSearchChange={(value) => setValue(value)} value={value} />
         </Col>
         <Col className="pr-0" style={{ flexGrow: "0" }}>
-          {/* <AddCommunal /> */}
+          <AddCommunal />
         </Col>
       </Row>
       <Col className="p-0">
-        {/* <Communal value={value} /> */}
+        <Communal value={value} />
       </Col>
     </Row>
 

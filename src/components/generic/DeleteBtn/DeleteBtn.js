@@ -11,7 +11,7 @@ import SubmitBtn from '../SubmitBtn';
 import './DeleteBtn.scss';
 
 
-const DeleteBtn = ({ onDelete, togglerModal, onModalClose, itemId, itemParentId, itemAddressName }) => {
+const DeleteBtn = ({ onDelete, togglerModal, onModalClose, itemId, firstValue, SecondValue }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,10 +25,11 @@ const DeleteBtn = ({ onDelete, togglerModal, onModalClose, itemId, itemParentId,
     evt.preventDefault();
 
     setIsSubmitting(false);
-    onDelete(onError, itemId, itemParentId, itemAddressName)
+    onDelete(onError, itemId, firstValue, SecondValue)
       .then((response) => {
         toast.success(response)
         setIsSubmitting(false);
+        toggleModal();
       })
       .catch(onError);
   };
@@ -38,7 +39,7 @@ const DeleteBtn = ({ onDelete, togglerModal, onModalClose, itemId, itemParentId,
       toggleModal();
     }
     onModalClose(true)
-  }, [onModalClose, togglerModal])
+  }, [onModalClose, togglerModal, itemId])
 
   return (
     <React.Fragment>
@@ -59,6 +60,12 @@ const DeleteBtn = ({ onDelete, togglerModal, onModalClose, itemId, itemParentId,
   );
 };
 
+
+DeleteBtn.defaultProps = {
+  itemId: '',
+  firstValue: '',
+  SecondValue: '',
+};
 
 DeleteBtn.propTypes = {
   onDelete: PropTypes.func.isRequired,

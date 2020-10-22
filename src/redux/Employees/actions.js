@@ -11,43 +11,9 @@ import {
   DELETE_EMPLOYEES_REQUESTED,
   DELETE_EMPLOYEES_SUCCESS,
   DELETE_EMPLOYEES_FAILURE,
-  FETCH_ROLES_REQUESTED,
-  FETCH_ROLES_SUCCESS,
-  FETCH_ROLES_FAILURE,
 } from '../types';
 import axios from '../../services/axios';
 import objectToFormData from '../../utils/objectToFormData';
-
-
-// Получение реестра ролей
-const rolesRequested = () => {
-  return {
-    type: FETCH_ROLES_REQUESTED,
-  };
-};
-
-const rolesSuccess = (data) => {
-  return {
-    type: FETCH_ROLES_SUCCESS,
-    data
-  };
-};
-
-const rolesError = (error) => {
-  return {
-    type: FETCH_ROLES_FAILURE,
-    error
-  };
-};
-
-const fetchRoles = () => {
-  return async (dispatch) => {
-    dispatch(rolesRequested());
-    return axios.get(`roles`)
-      .then(response => dispatch(rolesSuccess(response.data)))
-      .catch(error => dispatch(rolesError(error.response.data)));
-  }
-}
 
 // Получение реестра сотрудников
 const employeesRequested = () => {
@@ -194,4 +160,4 @@ const deleteEmployee = (id) => {
   }
 };
 
-export { fetchRoles, fetchEmployees, addEmployee, editEmployee, deleteEmployee };
+export { fetchEmployees, addEmployee, editEmployee, deleteEmployee };

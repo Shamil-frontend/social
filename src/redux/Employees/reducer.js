@@ -11,16 +11,9 @@ import {
   DELETE_EMPLOYEES_REQUESTED,
   DELETE_EMPLOYEES_SUCCESS,
   DELETE_EMPLOYEES_FAILURE,
-  FETCH_ROLES_REQUESTED,
-  FETCH_ROLES_SUCCESS,
-  FETCH_ROLES_FAILURE,
 } from '../types';
 
 const INIT_STATE = {
-  rolesError: null,
-  rolesLoading: true,
-  rolesList: [],
-
   error: null,
   loading: true,
   employeesList: [],
@@ -40,26 +33,6 @@ const INIT_STATE = {
 const employeesReducer = (state = INIT_STATE, action) => {
 
   switch (action.type) {
-
-    // Получение реестра ролей
-    case FETCH_ROLES_REQUESTED:
-      return {
-        ...state,
-        rolesError: null,
-        rolesLoading: true,
-      };
-    case FETCH_ROLES_SUCCESS:
-      return {
-        ...state,
-        rolesLoading: false,
-        rolesList: action.data
-      };
-    case FETCH_ROLES_FAILURE:
-      return {
-        ...state,
-        rolesError: action.error,
-        rolesLoading: false
-      };
 
     // Получение реестра сотрудников
     case FETCH_EMPLOYEES_REQUESTED:

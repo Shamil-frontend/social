@@ -7,7 +7,9 @@ import MaskedInput from 'react-text-mask';
 
 import inputMasksMap from '../../../utils/inputMasksMap';
 
-const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut, pattern, min, max, maxLength }) => {
+import './CustomField.scss';
+
+const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut }) => {
   const [field, meta] = useField(name);
 
   let classNames = 'custom-field';
@@ -22,7 +24,6 @@ const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut, patt
 
   return (
     <div className={classNames}>
-      <Form.Label>{label}</Form.Label>
       {mask ? (
         <MaskedInput
           type={type}
@@ -45,10 +46,6 @@ const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut, patt
       ) : (
           <Form.Control
             type={type}
-            pattern={pattern}
-            min={min}
-            max={max}
-            maxLength={maxLength}
             as={as}
             id={field.id}
             name={field.name}
@@ -65,7 +62,7 @@ const CustomField = ({ name, label, type, as, mask, isDisabled, onFocusOut, patt
             autoComplete="off"
           />
         )}
-
+      <Form.Label>{label}</Form.Label>
       <Form.Control.Feedback className="invalid-tooltip" type="invalidd">
         {meta.error}
       </Form.Control.Feedback>

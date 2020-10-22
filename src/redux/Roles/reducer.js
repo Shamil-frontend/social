@@ -16,7 +16,7 @@ import {
 const INIT_STATE = {
   error: null,
   loading: true,
-  roleList: [],
+  rolesList: [],
 
   adding: false,
   errorAdding: null,
@@ -45,7 +45,7 @@ const rolesReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         loading: false,
-        roleList: action.data
+        rolesList: action.data
       };
     case FETCH_ROLES_FAILURE:
       return {

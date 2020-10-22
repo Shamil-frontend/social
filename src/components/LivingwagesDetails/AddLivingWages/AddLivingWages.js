@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { toast } from 'react-toastify';
-import { object, number, date, setLocale } from 'yup';
+import { object, number, date, setLocale, lazy } from 'yup';
 import { Formik } from 'formik';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -23,11 +23,35 @@ import './AddLivingWages.scss';
 setLocale(validationSchemaLocale);
 
 const formValidationSchema = object().shape({
-  employableWageValue: number().required(),
-  childWageValue: number().required(),
-  pensionerWageValue: number().required(),
+  employableWageValue: lazy(() => number()
+    .typeError('Please enter a number.')
+    .when(['childWageValue', 'pensionerWageValue'], {
+      is: (childWageValue, pensionerWageValue) =>
+        (!childWageValue && !pensionerWageValue) ||
+        ([childWageValue].length === 0 && [pensionerWageValue].length === 0),
+      then: number().required(),
+      otherwise: number()
+    })),
+  childWageValue: lazy(() => number()
+    .typeError('Please enter a number.')
+    .when(['employableWageValue', 'pensionerWageValue'], {
+      is: (employableWageValue, pensionerWageValue) =>
+        (!employableWageValue && !pensionerWageValue) ||
+        ([employableWageValue].length === 0 && [pensionerWageValue].length === 0),
+      then: number().required(),
+      otherwise: number()
+    })),
+  pensionerWageValue: lazy(() => number()
+    .typeError('Please enter a number.')
+    .when(['employableWageValue', 'childWageValue'], {
+      is: (employableWageValue, childWageValue) =>
+        (!employableWageValue && !childWageValue) ||
+        ([employableWageValue].length === 0 && [childWageValue].length === 0),
+      then: number().required(),
+      otherwise: number()
+    })),
   dateStart: date().nullable().required(),
-});
+}, [['employableWageValue', 'childWageValue', 'pensionerWageValue']]);
 
 const initialValues = {
   employableWageValue: '',

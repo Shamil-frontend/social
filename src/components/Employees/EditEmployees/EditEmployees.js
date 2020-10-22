@@ -15,9 +15,10 @@ import CustomSelect from '../../generic/CustomSelect';
 import CustomField from '../../generic/CustomField';
 import SubmitBtn from '../../generic/SubmitBtn/SubmitBtn';
 
-import { fetchRoles, fetchEmployees, editEmployee } from '../../../redux/Employees/actions';
+import { fetchEmployees, editEmployee } from '../../../redux/Employees/actions';
 import { fetchOrgstructures } from '../../../redux/Orgstructures/actions';
 import { fetchJobpositions } from '../../../redux/Jobpositions/actions';
+import { fetchRoles } from '../../../redux/Roles/actions';
 import validationSchemaLocale from '../../../utils/validationSchemaLocale';
 import useEditItem from '../../wrappers/use-edit-item';
 
@@ -60,13 +61,13 @@ const EditEmployees = ({ item, togglerModal, onModalClose }) => {
 
   const { editing } = useSelector(({ employees }) => employees);
 
-  const employees = useSelector(({ employees }) => ({
-    data: employees.rolesList.map(({ id, nameRus }) => ({
+  const roles = useSelector(({ roles }) => ({
+    data: roles.rolesList.map(({ id, nameRus }) => ({
       value: id,
       label: nameRus,
     })),
-    loading: employees.rolesLoading,
-    error: employees.rolesError,
+    loading: roles.rolesLoading,
+    error: roles.rolesError,
   }));
 
   const orgstructures = useSelector(({ orgstructures }) => ({
@@ -200,9 +201,9 @@ const EditEmployees = ({ item, togglerModal, onModalClose }) => {
                     name="roleId"
                     placeholder="Роль сотрудника"
                     label="Роль сотрудника"
-                    data={employees.data}
-                    isLoading={employees.loading}
-                    isDisabled={employees.error}
+                    data={roles.data}
+                    isLoading={roles.loading}
+                    isDisabled={roles.error}
                   />
                 </Form.Group>
                 <Form.Group as={Col} xs={6}>
@@ -239,7 +240,7 @@ const EditEmployees = ({ item, togglerModal, onModalClose }) => {
                   <CustomField
                     type="string"
                     name="phoneNumber2"
-                    label="Запасной телефон:"
+                    label="Дополнительный телефон:"
                     mask="tel" />
                 </Form.Group>
               </Form.Row>

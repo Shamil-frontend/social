@@ -2,8 +2,8 @@
   tr { 
     th:not(:last-child),
     th:not(:first-child) {
-      min-width: 150px;
-      width: 20%;
+      min-width: 130px;
+      width: 25%;
     }
   }
 }
@@ -12,8 +12,8 @@
   tr {
     td:not(:last-child),
     td:not(:first-child) {
-      min-width: 150px;
-      width: 20%;
+      min-width: 130px;
+      width: 25%;
     }
   }
 }

@@ -7,7 +7,7 @@ import LoadingIndicator from '../components/generic/LoadingIndicator';
 
 const SocialPage = lazy(() => import('./references/social-page'));
 const AddressesPage = lazy(() => import('./references/addresses-page'));
-const SSJKUPage = lazy(() => import('./references/ssjku-page'));
+const StandardsPage = lazy(() => import('./references/standards-page'));
 const OrgstructuresPage = lazy(() => import('./references/orgstructures-page'));
 const JobpositionsPage = lazy(() => import('./references/jobpositions-page'));
 const RolesPage = lazy(() => import('./references/roles-page'));
@@ -37,14 +37,14 @@ const IndexPage = () => (
           Физические лица
         </Route>
 
-        <Route path="/references/social" exact>
+        <Route path="/references/social">
           <SocialPage />
         </Route>
         <Route path="/references/addresses" exact>
           <AddressesPage />
         </Route>
-        <Route path="/references/ssjku" exact>
-          <SSJKUPage />
+        <Route path="/references/standards" exact>
+          <StandardsPage />
         </Route>
         <Route path="/references/orgstructures" exact>
           <OrgstructuresPage />

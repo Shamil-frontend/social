@@ -11,7 +11,7 @@ const AppHeader = () => {
   return (
     <Navbar className="app-header" variant="dark" expand="lg" sticky="top">
       <Nav>
-        <Nav.Link as={NavLink} to="/" className="logo-link">
+        <Nav.Link as={NavLink} to="/" className="logo-link" >
           <h1 className="logo-title" >Социальные услуги</h1>
         </Nav.Link>
       </Nav>

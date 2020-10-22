@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Tab, Table, Row, Button } from 'react-bootstrap';
+import { Table, Row, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,15 +15,14 @@ import { fetchLivingWages, deleteLivingWages } from '../../redux/LivingWages/act
 
 import './LivingwagesDetails.scss';
 
-const LivingwagesDetails = ({ values, setNewValues }) => {
+const LivingwagesDetails = ({ values, setNewValues, id }) => {
 
   const dispatch = useDispatch();
 
   const {
     allLivingWages,
     loading,
-    error,
-    id
+    error
   } = useSelector(({ livingWages }) => livingWages);
 
   const [page, setPage] = useState([]);
@@ -85,84 +84,81 @@ const LivingwagesDetails = ({ values, setNewValues }) => {
 
   return (
     <>
-      <Tab.Content className="h-100">
-        <Tab.Pane eventKey={`socialgroup-${id}`} >
-          <Row className="m-0 h-100 flex-column flex-nowrap">
-            <Table hover className="reference-table">
-              <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-              </colgroup>
-              <thead className="thead-block thead-livingwage" >
-                <tr>
-                  <th>№</th>
-                  <th>Прожиточный минимум</th>
-                  <th>Дата начала</th>
-                  <th>Дата окончания</th>
-                  <th>Удаление</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colSpan="5" className="p-0">
-                    <div className="table-wrapper table-scroll">
-                      <table className="table-container">
-                        <colgroup>
-                          <col />
-                          <col />
-                          <col />
-                          <col />
-                          <col />
-                        </colgroup>
-                        <tbody className="tBody-block tBody-livingwage">
-                          {page.length ? (
-                            page.map(({ id, wageValue, dateStart, dateStop }, index) => (
-                              <tr key={id}>
-                                <td>{index + 1}</td>
-                                <td>{wageValue}</td>
-                                <td>{convertDate(dateStart)}</td>
-                                <td>{convertDate(dateStop)}</td>
-                                <td >
-                                  <div className="btn-wrapper">
-                                    <Button className="btn btn-delete" onClick={() => {
-                                      setCurentItemId(id);
-                                      setCloseDeleteModal(false)
-                                    }}>
-                                      <FontAwesomeIcon icon={faTrash} />
-                                    </Button>
+      <Row className="m-0 h-100 flex-column flex-nowrap">
+        <Table hover className="reference-table">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <thead className="thead-block thead-livingwage" >
+            <tr>
+              <th>№</th>
+              <th>Прожиточный минимум</th>
+              <th>Дата начала</th>
+              <th>Дата окончания</th>
+              <th>Удаление</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colSpan="5" className="p-0">
+                <div className="table-wrapper table-scroll">
+                  <table className="table-container">
+                    <colgroup>
+                      <col />
+                      <col />
+                      <col />
+                      <col />
+                      <col />
+                    </colgroup>
+                    <tbody className="tBody-block tBody-livingwage">
+                      {page.length ? (
+                        page.map(({ id, wageValue, dateStart, dateStop }, index) => (
+                          <tr key={id}>
+                            <td>{index + 1}</td>
+                            <td>{wageValue}</td>
+                            <td>{convertDate(dateStart)}</td>
+                            <td>{convertDate(dateStop)}</td>
+                            <td >
+                              <div className="btn-wrapper">
+                                <Button className="btn btn-delete" onClick={() => {
+                                  setCurentItemId(id);
+                                  setCloseDeleteModal(false)
+                                }}>
+                                  <FontAwesomeIcon icon={faTrash} />
+                                </Button>
 
-                                  </div>
-                                </td>
-                              </tr>
-                            ))) : (
-                              <tr>
-                                <td className="text-muted">Ничего не найдено</td>
-                              </tr>
-                            )}
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+                              </div>
+                            </td>
+                          </tr>
+                        ))) : (
+                          <tr>
+                            <td className="text-muted">Ничего не найдено</td>
+                          </tr>
+                        )}
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
 
-            </Table >
-            {bool ?
-              <Paginator
-                className="pagination-block"
-                totalItemsCount={visibleArray.length}
-                portionLimit={portionLimit}
-                pageLimit={pageLimit}
-                activePage={activePage}
-                setActivePage={(itemPage) => setActivePage(itemPage)}
-              /> :
-              null}
-          </Row>
-        </Tab.Pane >
-      </Tab.Content >
+        </Table >
+        {bool ?
+          <Paginator
+            className="pagination-block"
+            totalItemsCount={visibleArray.length}
+            portionLimit={portionLimit}
+            pageLimit={pageLimit}
+            activePage={activePage}
+            setActivePage={(itemPage) => setActivePage(itemPage)}
+          /> :
+          null}
+      </Row>
+
       <DeleteBtn
         onDelete={deleteItem}
         itemId={curentItemId}

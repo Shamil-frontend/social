@@ -17,7 +17,7 @@ import './Relations.scss';
 
 const Relations = ({ value }) => {
 
-  const [curentItem, setCurentItem] = useState('');
+  const [curentItem, setCurentItem] = useState({});
   const [closeEditModal, setCloseEditModal] = useState(true);
   const [closeDeleteModal, setCloseDeleteModal] = useState(true);
   const [filteredRelations, setFilteredRelations] = useState([]);
@@ -83,7 +83,7 @@ const Relations = ({ value }) => {
                   </colgroup>
                   <tbody className="tBody-block tBody-relations">
                     {visibleData.map((item, index) => {
-                      const { relation, relationDependences } = item
+                      const { relation, relationDependences } = item;
                       const { id, name } = relation;
                       const names = relationDependences.map((item) => `${item.name} / `);
 
@@ -95,7 +95,10 @@ const Relations = ({ value }) => {
                           <td >
                             <div className="btn-wrapper">
                               <Button className="btn-edit" onClick={() => {
-                                setCurentItem(item);
+                                setCurentItem({
+                                  relation: relation,
+                                  relationDependences: relationDependences
+                                });
                                 setCloseEditModal(false);
                               }}>
                                 <FontAwesomeIcon icon={faEdit} />
@@ -118,6 +121,7 @@ const Relations = ({ value }) => {
           </tr>
         </tbody>
       </Table >
+
       <EditRelDependence
         item={curentItem}
         togglerModal={closeEditModal}

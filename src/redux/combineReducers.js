@@ -10,6 +10,8 @@ import { relationsReducer } from './Relations/reducer';
 import { rolesReducer } from './Roles/reducer';
 import { banksReducer } from './Banks/reducer';
 import { maxcostsReducer } from './Maxcosts/reducer';
+import { standardsReducer } from './Standards/reducer';
+import { communalReducer } from './Communal/reducer';
 
 const rootReducer = combineReducers({
   socialGroups: socialGroupsReducer,
@@ -22,7 +24,8 @@ const rootReducer = combineReducers({
   roles: rolesReducer,
   banks: banksReducer,
   maxcosts: maxcostsReducer,
-
+  standards: standardsReducer,
+  communal: communalReducer,
 });
 
 export default rootReducer;

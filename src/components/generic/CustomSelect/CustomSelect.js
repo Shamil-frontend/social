@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useField } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Select from 'react-select';
 
-const CustomSelect = ({ defaultValue, name, data, label, placeholder, isLoading, isDisabled, onChange, isMulti }) => {
+import './CustomSelect.scss';
+
+const CustomSelect = ({ defaultValue, name, data, label, placeholder, isClearable, isLoading, isDisabled, onChange, isMulti }) => {
+  const [isFocused, setIsFocused] = useState(false);
   const [field, meta, helpers] = useField(name);
 
   let classNames = 'custom-select2';
+
+  if (field.value) {
+    classNames += ' has-value';
+  }
+
+  if (isFocused) {
+    classNames += ' is-focused';
+  }
 
   if (meta.touched && meta.error) {
     classNames += ' is-invalid';
@@ -30,10 +41,16 @@ const CustomSelect = ({ defaultValue, name, data, label, placeholder, isLoading,
           }
           return helpers.setValue(val);
         }}
+        onBlur={(evt) => {
+          setIsFocused(false);
+          return field.onBlur(evt);
+        }}
         placeholder={placeholder}
-        isClearable="true"
+        isClearable={isClearable}
         isLoading={isLoading}
         isDisabled={isDisabled}
+        menuPlacement="auto"
+        openMenuOnFocus
       />
 
 
@@ -49,6 +66,7 @@ CustomSelect.defaultProps = {
   isMulti: false,
   data: [],
   placeholder: 'Выберите из вариантов',
+  isClearable: true,
   isLoading: false,
   isDisabled: false,
   onChange: undefined,
@@ -61,6 +79,7 @@ CustomSelect.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  isClearable: PropTypes.bool,
   isLoading: PropTypes.bool,
   isDisabled: PropTypes.bool,
   onChange: PropTypes.func,

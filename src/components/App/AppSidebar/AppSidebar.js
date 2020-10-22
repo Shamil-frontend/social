@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { NavLink, withRouter } from 'react-router-dom';
 import { Button, Nav, NavItem } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setId } from '../../../redux/LivingWages/actions';
-
 import './AppSidebar.scss';
 
 
-const AppSidebar = ({ toggleNestedSidebar, navList, clearId, itemId, parentHistory }) => {
+const AppSidebar = ({ toggleNestedSidebar, navList, clearId, itemId, history }) => {
 
-  const dispatch = useDispatch();
+  const HISTORY = history.location.pathname;
   const [visibleParentNav, setVisibleParentNav] = useState('');
   const [activeNav, setActiveNav] = useState('');
-  const [pathName, setPathName] = useState(parentHistory);
+  const [pathName, setPathName] = useState(HISTORY);
 
   const iconStyles = { width: "28px", height: "28px", margin: "0px", color: "rgb(114 131 143)" };
 
-  const onSetId = (id) => {
-    dispatch(setId(id))
-  };
+
 
   useEffect(() => {
     if (clearId) {
       setVisibleParentNav('')
     }
-  }, [clearId, parentHistory])
+  }, [clearId]);
+
+  // useEffect(() => {
+  //   if (HISTORY) {
+  //     setPathName(HISTORY);
+  //     toggleNestedSidebar(true);
+  //     setActiveNav('');
+  //   }
+  // }, [homeLink]);
 
   return (
     <aside className="app-sidebar">
@@ -58,7 +61,6 @@ const AppSidebar = ({ toggleNestedSidebar, navList, clearId, itemId, parentHisto
                   <Button
                     className={`main-nav-link btn-link ${id !== activeNav ? null : "active-nav"}`}
                     onClick={() => {
-                      onSetId(1);
                       itemId(id);
                       setPathName(link);
                       setActiveNav(id);
