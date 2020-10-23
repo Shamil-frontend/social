@@ -43,7 +43,7 @@ const IndexPage = () => (
         <Route path="/references/addresses" exact>
           <AddressesPage />
         </Route>
-        <Route path="/references/standards" exact>
+        <Route path="/references/standards">
           <StandardsPage />
         </Route>
         <Route path="/references/orgstructures" exact>

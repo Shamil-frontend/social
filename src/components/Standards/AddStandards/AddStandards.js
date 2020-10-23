@@ -139,7 +139,7 @@ const AddStandards = ({ housetypesList, cities, defaultCriteria = {} }) => {
                                   <tr key={value}>
                                     <td>{index + 1}</td>
                                     <td>{label}</td>
-                                    <td>
+                                    {/* <td>
                                       <Form.Group controlId="standards">
                                         <CustomField type="number" name="standards" label="" />
                                       </Form.Group>
@@ -158,7 +158,7 @@ const AddStandards = ({ housetypesList, cities, defaultCriteria = {} }) => {
                                       <Form.Group controlId="standards">
                                         <CustomField type="number" name="standards" label="" />
                                       </Form.Group>
-                                    </td>
+                                    </td> */}
                                   </tr>
                                 )
                               })}

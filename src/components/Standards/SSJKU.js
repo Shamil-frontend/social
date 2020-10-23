@@ -2,70 +2,101 @@ import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect, useRouteMatch, NavLink } from 'react-router-dom';
 import { Col, Nav } from 'react-bootstrap';
 
-import AddLivingWages from '../LivingwagesDetails/AddLivingWages';
-import LivingwagesDetails from '../LivingwagesDetails';
-import LoadingIndicator from '../generic/LoadingIndicator';
-import ErrorIndicator from '../generic/ErrorIndicator';
+import AddStandards from './AddStandards/AddStandards';
+import StandardsDetails from './StandardsDetails';
+// import SearchBar from '../generic/SearchBar';
+// import LoadingIndicator from '../generic/LoadingIndicator';
+// import ErrorIndicator from '../generic/ErrorIndicator';
 
-import './Social.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSocialGroups } from '../../redux/SocialGroups/actions';
+import './Standards.scss';
 
-const Social = () => {
+const SSJKU = ({ addressName, houseTypeStandardValues, housetypesList, defaultCriteria, cities }) => {
 
-  const NAV_LINK = {
-    'Трудоспособные': 'employable',
-    'Дети': 'children',
-    'Пенсионеры': 'pensioner',
+  const houseTypes = {
+    'Многоквартирный': 'multifamily',
+    'Индивидуальный, без газа': 'individual-1',
+    'Индивидуальный, оплата газа по норме': 'individual-2',
+    'Индивидуальный, оплата газа по счетчику': 'individual-3',
   };
 
-  const [values, setValues] = useState("");
-  const dispatch = useDispatch();
-  const { socialGroups, loading, error } = useSelector(({ socialGroups }) => socialGroups);
+  // const [searchValue, setSearchValue] = useState('');
+  const [dataId, setDataId] = useState(0);
+  // const [dataStandart, setDataStandart] = useState([]);
+
   const { path, url } = useRouteMatch();
+  // const { addressName, houseTypeStandardValues } = standardsList;
 
-  useEffect(() => {
-    dispatch(fetchSocialGroups());
-  }, [dispatch])
+  const data = houseTypeStandardValues && [houseTypeStandardValues[dataId]];
 
-  if (loading) {
-    return <LoadingIndicator />;
-  }
 
-  if (error) {
-    return <ErrorIndicator />;
-  }
+
+  // useEffect(() => {
+  //   setDataStandart(houseTypeStandardValues)
+  // }, [addressName, houseTypeStandardValues, housetypesList])
+  // if (loading) {
+  //   return <LoadingIndicator />;
+  // }
+
+  // if (error) {
+  //   return <ErrorIndicator />;
+  // }
 
   return (
     <>
-      <div className="social-container">
-        <div className="social-nav">
-          <Nav className="socialgroup-nav-list" variant="tabs" defaultActiveKey={url} justify>
-            {socialGroups.map(({ id, name }) => (
+      <div className="standard-container">
+        <div className="standard-nav">
+
+          <div className="table-top-block" >
+            <h2 style={{ textAlign: 'left', fontSize: '18px', marginBottom: '0', lineHeight: "34px" }}>{addressName}</h2>
+            <Col>
+              <AddStandards defaultCriteria={defaultCriteria} housetypesList={housetypesList} cities={cities.data} />
+            </Col>
+          </div>
+          <Nav className="standard-nav-list" variant="tabs" defaultActiveKey={url} justify>
+            {housetypesList.map(({ id, typeName }, idx) => (
               <Nav.Item key={id} className="socialgroup-nav-item">
-                <Nav.Link as={NavLink} activeClassName="active-tabs" to={`${url}/${NAV_LINK[name]}`}>
-                  {name}
+                <Nav.Link
+                  as={NavLink}
+                  activeClassName="active-tabs"
+                  to={`${url}/${houseTypes[typeName]}`}
+                  onClick={() => setDataId(idx)} >
+                  {typeName}
+
                 </Nav.Link>
               </Nav.Item>
             ))}
           </Nav>
-          <Col className="pt-1 pr-0" style={{ flexGrow: "0" }}>
-            <AddLivingWages />
-          </Col>
-
         </div>
 
-
         <Switch>
-          <Redirect from={`${url}/`} to={`${url}/employable`} exact />
-          <Route path={`${path}/employable`} exact>
-            <LivingwagesDetails id={1} setNewValues={(val) => setValues(val)} values={values} />
+          <Redirect from={`${url}`} to={`${url}/multifamily`} exact />
+          <Route path={`${path}/multifamily`} exact>
+            <StandardsDetails
+              defaultCriteria={defaultCriteria}
+              data={data}
+            // searchValue={searchValue}
+            />
           </Route>
-          <Route path={`${path}/children`} exact>
-            <LivingwagesDetails id={2} setNewValues={(val) => setValues(val)} values={values} />
+          <Route path={`${path}/individual-1`} exact>
+            <StandardsDetails
+              defaultCriteria={defaultCriteria}
+              data={data}
+            // searchValue={searchValue}
+            />
           </Route>
-          <Route path={`${path}/pensioner`} exact>
-            <LivingwagesDetails id={3} setNewValues={(val) => setValues(val)} values={values} />
+          <Route path={`${path}/individual-2`} exact>
+            <StandardsDetails
+              defaultCriteria={defaultCriteria}
+              data={data}
+            // searchValue={searchValue}
+            />
+          </Route>
+          <Route path={`${path}/individual-3`} exact>
+            <StandardsDetails
+              defaultCriteria={defaultCriteria}
+              data={data}
+            // searchValue={searchValue}
+            />
           </Route>
         </Switch>
       </div>
@@ -73,4 +104,4 @@ const Social = () => {
   )
 }
 
-export default Social;
+export default SSJKU;

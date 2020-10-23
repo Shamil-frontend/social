@@ -3,14 +3,14 @@ import { Switch, Route, Redirect, useRouteMatch, NavLink } from 'react-router-do
 import { Col, Nav } from 'react-bootstrap';
 
 import AddLivingWages from '../../components/LivingwagesDetails/AddLivingWages';
-// import SocialGroupsList from '../SocialGroupsList';
 import LivingwagesDetails from '../../components/LivingwagesDetails';
 import LoadingIndicator from '../generic/LoadingIndicator';
 import ErrorIndicator from '../generic/ErrorIndicator';
 
-import './Social.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSocialGroups } from '../../redux/SocialGroups/actions';
+
+import './Social.scss';
 
 const Social = () => {
 
